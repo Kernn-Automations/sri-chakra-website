@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useLanguage } from "../../context/LanguageContext";
 // Mock translation context for demo
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Engineering = () => {
   const { t } = useLanguage();
@@ -10,6 +14,9 @@ const Engineering = () => {
   const isDesktop = useMediaQuery({ minWidth: 1024 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
+  const diagramRef = useRef(null);
 
   const getStyles = () => {
     if (isMobile) {
@@ -80,6 +87,43 @@ const Engineering = () => {
 
     return styles;
   };
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      /* Content reveal */
+      tl.from(contentRef.current.children, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.12,
+      });
+
+      /* Diagram reveal */
+      tl.from(
+        diagramRef.current,
+        {
+          scale: 0.94,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+        },
+        "-=0.6"
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const responsiveStyles = getStyles();
 
@@ -88,10 +132,11 @@ const Engineering = () => {
       style={responsiveStyles.section}
       id="engineering"
       className="snap-section"
+      ref={sectionRef}
     >
       <div style={responsiveStyles.container}>
         {/* Left: Content */}
-        <div style={responsiveStyles.content}>
+        <div style={responsiveStyles.content} ref={contentRef}>
           <div style={responsiveStyles.eyebrowContainer}>
             <div style={responsiveStyles.eyebrowLine}></div>
             <span style={responsiveStyles.eyebrow}>
@@ -122,7 +167,7 @@ const Engineering = () => {
 
         {/* Right: Precision Engineering Diagram */}
         <div style={responsiveStyles.visual}>
-          <div style={responsiveStyles.diagram}>
+          <div style={responsiveStyles.diagram} ref={diagramRef}>
             {/* Header with technical notation */}
             <div style={responsiveStyles.diagramHeader}>
               <span style={responsiveStyles.diagramCode}>SYS_ENG_v4.2</span>

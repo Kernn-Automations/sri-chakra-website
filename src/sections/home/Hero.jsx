@@ -1,12 +1,95 @@
 import { useLanguage } from "../../context/LanguageContext";
 import { useMediaQuery } from "react-responsive";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 const Hero = () => {
   const { t } = useLanguage();
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const heroRef = useRef(null);
+  const titlePrimaryRef = useRef(null);
+  const titleSecondaryRef = useRef(null);
+  const barRef = useRef(null);
+  const descRef = useRef(null);
+  const ctaRef = useRef(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      delay: 2,
+    });
+
+    /* Initial states */
+    gsap.set(titlePrimaryRef.current, { y: 80, scale: 0.92, opacity: 0 });
+    gsap.set(titleSecondaryRef.current, { y: 80, opacity: 0 });
+    gsap.set(barRef.current, { height: 0 });
+    gsap.set(descRef.current, { x: -40, opacity: 0 });
+    gsap.set(ctaRef.current.children, { x: 30, opacity: 0 });
+
+    /* Build sequence */
+    tl.to(titlePrimaryRef.current, {
+      y: 0,
+      scale: 1,
+      opacity: 1,
+      duration: 1,
+    })
+      .to(
+        titleSecondaryRef.current,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+        },
+        "-=0.6"
+      )
+      .to(
+        barRef.current,
+        {
+          height: "100%",
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      )
+      .to(
+        descRef.current,
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.7,
+        },
+        "-=0.3"
+      )
+      .to(
+        ctaRef.current.children,
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power2.out",
+        },
+        "-=0.2"
+      )
+      /* Micro vibration settle (engineering touch) */
+      .to(
+        heroRef.current,
+        {
+          x: 0,
+          duration: 0.15,
+          ease: "rough({ strength: 2, points: 20 })",
+        },
+        "-=0.3"
+      );
+  }, []);
 
   return (
-    <section style={styles.wrapper} className="snap-section" id="hero">
+    <section
+      style={styles.wrapper}
+      className="snap-section"
+      id="hero"
+      ref={heroRef}
+    >
       <div style={styles.grid}>
         {/* LEFT CONTENT */}
         <div style={styles.left}>
@@ -19,23 +102,25 @@ const Hero = () => {
                 : "clamp(88px, 9vw, 140px)",
             }}
           >
-            <span style={styles.titlePrimary}>
+            <span style={styles.titlePrimary} ref={titlePrimaryRef}>
               {t("home.hero.titlePrimary")}
             </span>
             <br />
-            <span style={styles.titleSecondary}>
+            <span style={styles.titleSecondary} ref={titleSecondaryRef}>
               {t("home.hero.titleSecondary")}
             </span>
           </h1>
 
           {/* Description block */}
           <div style={styles.descWrap}>
-            <span style={styles.yellowBar} />
-            <p style={styles.description}>{t("home.hero.description")}</p>
+            <span style={styles.yellowBar} ref={barRef} />
+            <p style={styles.description} ref={descRef}>
+              {t("home.hero.description")}
+            </p>
           </div>
 
           {/* CTA Buttons */}
-          <div style={styles.ctaRow}>
+          <div style={styles.ctaRow} ref={ctaRef}>
             <button style={styles.primaryBtn}>
               {t("home.hero.primaryCta")} →
             </button>
