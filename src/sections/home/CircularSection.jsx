@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useLanguage } from "../../context/LanguageContext";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const STEP_IMAGES = [
-  "https://placehold.co/600x400?text=STEP+01",
-  "https://placehold.co/600x400?text=STEP+02",
-  "https://placehold.co/600x400?text=STEP+03",
-  "https://placehold.co/600x400?text=STEP+04",
+  "https://i.ibb.co/nqLLt93s/steel-rolls.jpg",
+  "https://i.ibb.co/1G2fwddJ/forging-steel.jpg",
+  "https://i.ibb.co/2mvHyKx/crash-barrier.jpg",
+  "https://i.ibb.co/Ndw2DQFH/steel-recycle.png",
 ];
 
 const CircularSection = () => {
@@ -16,6 +20,11 @@ const CircularSection = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const systemRef = useRef(null);
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const systemAnimRef = useRef(null);
+  const detailRef = useRef(null);
+
   const [radius, setRadius] = useState(0);
   const [active, setActive] = useState(0);
 
@@ -33,11 +42,47 @@ const CircularSection = () => {
     return () => window.removeEventListener("resize", updateRadius);
   }, []);
 
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 75%",
+        end: "bottom 25%",
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    tl.fromTo(
+      headerRef.current,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+    )
+      .fromTo(
+        systemAnimRef.current,
+        { opacity: 0, scale: 0.92 },
+        { opacity: 1, scale: 1, duration: 1, ease: "power3.out" },
+        "-=0.4"
+      )
+      .fromTo(
+        detailRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        "-=0.5"
+      );
+
+    return () => {
+      tl.scrollTrigger && tl.scrollTrigger.kill();
+      tl.kill();
+    };
+  }, []);
+
   return (
-    <section style={styles.section}>
+    <section style={styles.section} ref={sectionRef}>
       <div style={styles.container}>
         {/* HEADER */}
-        <div style={styles.header}>
+        <div style={styles.header} ref={headerRef}>
           <div style={styles.eyebrowRow}>
             <div style={styles.eyebrowLine} />
             <span style={styles.eyebrow}>{t("home.circular.eyebrow")}</span>
@@ -55,7 +100,7 @@ const CircularSection = () => {
           }}
         >
           {/* CIRCULAR SYSTEM */}
-          <div style={styles.systemWrap}>
+          <div style={styles.systemWrap} ref={systemAnimRef}>
             <div ref={systemRef} style={styles.system}>
               <div style={styles.outerRing} />
               <div style={styles.middleRing} />
@@ -97,13 +142,14 @@ const CircularSection = () => {
           </div>
 
           {/* DETAIL PANEL */}
-          <div style={styles.detail}>
+          <div style={styles.detail} ref={detailRef}>
             <div style={styles.imageWrap}>
               <img
                 src={STEP_IMAGES[active]}
                 alt={steps[active].title}
                 style={styles.image}
                 draggable={false}
+                loading="lazy"
               />
             </div>
 
