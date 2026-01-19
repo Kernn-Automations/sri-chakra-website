@@ -148,24 +148,27 @@ const translations = {
         cta: "VIEW DETAILS",
         items: [
           {
-            title: "Crash Barriers",
+            title: "Steel Roofing Sheets",
+            image:
+              "https://i.ibb.co/zVC57vd1/Whats-App-Image-2026-01-13-at-12-24-49-PM.jpg",
             description:
-              "High-strength steel crash barriers engineered to absorb impact energy and enhance roadside safety across highways and expressways.",
+              "High-quality steel roofing sheets manufactured for industrial, commercial, and infrastructure applications.",
+            specs: [
+              "Thickness: 0.1mm – 0.5mm",
+              "Available in multiple color finishes",
+              "Custom cut lengths as per customer requirement",
+            ],
           },
           {
-            title: "W-Beam Guardrails",
+            title: "W-Beam Crash Barriers",
+            image: "https://i.ibb.co/hFkVSjPt/w-beam-crash-barrier.jpg",
             description:
-              "Precision-formed W-beam guardrails manufactured to meet national highway safety standards and long-term durability requirements.",
-          },
-          {
-            title: "Metal Beam Crash Barriers",
-            description:
-              "Robust metal beam systems designed for controlled vehicle deceleration and maximum passenger protection.",
-          },
-          {
-            title: "Structural Steel Components",
-            description:
-              "Custom-fabricated steel components for infrastructure, industrial, and public works applications.",
+              "W-Beam crash barrier systems engineered to enhance road safety and meet highway authority standards.",
+            specs: [
+              "Manufactured from high-strength structural steel",
+              "Designed as per IRC / MoRTH specifications",
+              "Suitable for highways and expressways",
+            ],
           },
         ],
       },
@@ -328,24 +331,27 @@ const translations = {
         cta: "వివరాలు చూడండి",
         items: [
           {
-            title: "క్రాష్ బారియర్లు",
+            title: "స్టీల్ రూఫింగ్ షీట్లు",
+            image:
+              "https://i.ibb.co/zVC57vd1/Whats-App-Image-2026-01-13-at-12-24-49-PM.jpg",
             description:
-              "హైవేలు మరియు ఎక్స్‌ప్రెస్‌వేల్లో ప్రమాద తీవ్రతను తగ్గించేందుకు రూపొందించిన అధిక బలం గల స్టీల్ క్రాష్ బారియర్లు.",
+              "పరిశ్రమలు, వాణిజ్య మరియు మౌలిక వసతుల కోసం తయారు చేసిన అధిక నాణ్యత గల స్టీల్ రూఫింగ్ షీట్లు.",
+            specs: [
+              "మందం: 0.1 మిమీ – 0.5 మిమీ",
+              "వివిధ రంగుల్లో అందుబాటులో ఉన్నాయి",
+              "కస్టమర్ అవసరానికి అనుగుణంగా కట్ చేయబడతాయి",
+            ],
           },
           {
-            title: "డబ్ల్యూ-బీమ్ గార్డ్‌రైల్స్",
+            title: "డబ్ల్యూ-బీమ్ క్రాష్ బారియర్లు",
+            image: "https://i.ibb.co/hFkVSjPt/w-beam-crash-barrier.jpg",
             description:
-              "జాతీయ రహదారి భద్రతా ప్రమాణాలకు అనుగుణంగా తయారు చేసిన ఖచ్చితమైన డబ్ల్యూ-బీమ్ గార్డ్‌రైల్స్.",
-          },
-          {
-            title: "మెటల్ బీమ్ క్రాష్ బారియర్లు",
-            description:
-              "వాహన వేగాన్ని నియంత్రించి ప్రయాణికుల భద్రతను గరిష్టంగా పెంచే బలమైన మెటల్ బీమ్ వ్యవస్థలు.",
-          },
-          {
-            title: "స్ట్రక్చరల్ స్టీల్ భాగాలు",
-            description:
-              "ఇన్‌ఫ్రాస్ట్రక్చర్, పరిశ్రమలు మరియు ప్రజా నిర్మాణాల కోసం అనుకూలంగా తయారు చేసిన స్టీల్ భాగాలు.",
+              "రహదారి భద్రతను మెరుగుపరచేందుకు రూపొందించిన డబ్ల్యూ-బీమ్ క్రాష్ బారియర్ వ్యవస్థలు.",
+            specs: [
+              "అధిక బలం గల స్ట్రక్చరల్ స్టీల్‌తో తయారు చేయబడింది",
+              "IRC / MoRTH ప్రమాణాల ప్రకారం రూపకల్పన",
+              "హైవేలు మరియు ఎక్స్‌ప్రెస్‌వేలకు అనుకూలం",
+            ],
           },
         ],
       },
@@ -504,31 +510,34 @@ const translations = {
           { value: "पैन इंडिया", label: "आपूर्ति नेटवर्क" },
         ],
       },
-    },
-    grid: {
-      cta: "विवरण देखें",
-      items: [
-        {
-          title: "क्रैश बैरियर्स",
-          description:
-            "हाईवे और एक्सप्रेसवे पर दुर्घटना प्रभाव को कम करने के लिए डिज़ाइन किए गए उच्च शक्ति वाले स्टील क्रैश बैरियर्स।",
-        },
-        {
-          title: "डब्ल्यू-बीम गार्डरेल्स",
-          description:
-            "राष्ट्रीय सड़क सुरक्षा मानकों के अनुसार निर्मित सटीक डब्ल्यू-बीम गार्डरेल सिस्टम।",
-        },
-        {
-          title: "मेटल बीम क्रैश बैरियर्स",
-          description:
-            "वाहन की गति को नियंत्रित कर यात्रियों की सुरक्षा बढ़ाने वाले मजबूत मेटल बीम सिस्टम।",
-        },
-        {
-          title: "स्ट्रक्चरल स्टील कंपोनेंट्स",
-          description:
-            "इन्फ्रास्ट्रक्चर, औद्योगिक और सार्वजनिक परियोजनाओं के लिए कस्टम-निर्मित स्टील घटक।",
-        },
-      ],
+      grid: {
+        cta: "विवरण देखें",
+        items: [
+          {
+            title: "स्टील रूफिंग शीट्स",
+            image:
+              "https://i.ibb.co/zVC57vd1/Whats-App-Image-2026-01-13-at-12-24-49-PM.jpg",
+            description:
+              "औद्योगिक, वाणिज्यिक और बुनियादी ढांचा परियोजनाओं के लिए निर्मित उच्च गुणवत्ता वाली स्टील रूफिंग शीट्स।",
+            specs: [
+              "मोटाई: 0.1 मिमी – 0.5 मिमी",
+              "विभिन्न रंग विकल्पों में उपलब्ध",
+              "ग्राहक की आवश्यकता अनुसार लंबाई में कटिंग",
+            ],
+          },
+          {
+            title: "डब्ल्यू-बीम क्रैश बैरियर्स",
+            image: "https://i.ibb.co/hFkVSjPt/w-beam-crash-barrier.jpg",
+            description:
+              "सड़क सुरक्षा बढ़ाने के लिए डिज़ाइन किए गए डब्ल्यू-बीम क्रैश बैरियर सिस्टम।",
+            specs: [
+              "उच्च शक्ति वाले स्ट्रक्चरल स्टील से निर्मित",
+              "IRC / MoRTH मानकों के अनुसार डिज़ाइन",
+              "हाईवे और एक्सप्रेसवे के लिए उपयुक्त",
+            ],
+          },
+        ],
+      },
     },
 
     language: {
