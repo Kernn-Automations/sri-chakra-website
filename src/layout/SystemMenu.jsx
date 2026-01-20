@@ -17,7 +17,7 @@ const SystemMenu = ({ open, onClose }) => {
 
   const MENU_ITEMS = [
     { key: "home", path: "/" },
-    { key: "products", path: "/products" },
+    //{ key: "products", path: "/products" },
     { key: "about", path: "/about" },
     { key: "projects", path: "/projects" },
     //{ key: "contact", path: "/contact" },
