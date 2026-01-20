@@ -149,6 +149,7 @@ const translations = {
         items: [
           {
             title: "Steel Roofing Sheets",
+            key: "roofing",
             image:
               "https://i.ibb.co/zVC57vd1/Whats-App-Image-2026-01-13-at-12-24-49-PM.jpg",
             description:
@@ -161,6 +162,7 @@ const translations = {
           },
           {
             title: "W-Beam Crash Barriers",
+            key: "wbeam",
             image: "https://i.ibb.co/hFkVSjPt/w-beam-crash-barrier.jpg",
             description:
               "W-Beam crash barrier systems engineered to enhance road safety and meet highway authority standards.",
@@ -171,6 +173,191 @@ const translations = {
             ],
           },
         ],
+      },
+      details: {
+        color: "Color",
+        specsTitle: "Technical Specifications",
+        sourceTitle: "Material Sourcing",
+        wbeamVisual: "High-strength galvanized W-Beam barrier system",
+
+        roofing: {
+          category: "STEEL ROOFING SYSTEM",
+          title: "Color Coated Steel Roofing Sheets",
+          description:
+            "High-performance steel roofing sheets engineered for durability, corrosion resistance, and aesthetic flexibility.",
+          specs: [
+            "Thickness range: 0.1mm – 0.5mm",
+            "Custom cut lengths as per customer requirement",
+            "Multiple color coated finishes",
+            "High tensile strength galvanized steel",
+          ],
+          source:
+            "Sourced from certified primary steel manufacturers complying with Indian and international standards.",
+        },
+
+        wbeam: {
+          category: "ROAD SAFETY INFRASTRUCTURE",
+          title: "W-Beam Crash Barriers",
+          description:
+            "Crash-tested W-Beam guardrails designed for highway safety and energy absorption during impact.",
+          specs: [
+            "Hot-dip galvanized steel",
+            "Conforms to MORTH & IRC standards",
+            "High impact resistance",
+            "Suitable for highways and expressways",
+          ],
+          source:
+            "Manufactured using certified structural-grade steel from approved suppliers.",
+        },
+      },
+    },
+    manufacturing: {
+      processFlow: {
+        eyebrow: "MANUFACTURING PROCESS",
+        title: "Engineered Manufacturing Workflow",
+        description:
+          "Every product manufactured at Sri Chakra Industries follows a controlled, step-by-step process to ensure strength, accuracy, and compliance with national standards.",
+
+        steps: [
+          {
+            key: "raw-material",
+            title: "Raw Material Sourcing",
+            description:
+              "High-grade steel coils are sourced from certified primary steel manufacturers complying with Indian and international standards.",
+          },
+          {
+            key: "processing",
+            title: "Coil Processing & Slitting",
+            description:
+              "Steel coils are precisely slit and prepared to required widths, ensuring dimensional consistency before forming.",
+          },
+          {
+            key: "forming",
+            title: "Roll Forming & Profiling",
+            description:
+              "Advanced roll-forming machines shape the steel into roofing sheets and W-beam profiles with uniform geometry.",
+          },
+          {
+            key: "coating",
+            title: "Galvanization / Surface Coating",
+            description:
+              "Protective galvanization or color coating is applied to enhance corrosion resistance and service life.",
+          },
+          {
+            key: "inspection",
+            title: "Dimensional & Quality Inspection",
+            description:
+              "Each batch undergoes strict dimensional checks and visual inspection to meet engineering specifications.",
+          },
+          {
+            key: "dispatch",
+            title: "Packing & Dispatch",
+            description:
+              "Finished products are securely packed and dispatched for safe transportation to project sites.",
+          },
+        ],
+      },
+    },
+    railway: {
+      overview: {
+        eyebrow: "RAILWAY INFRASTRUCTURE",
+        title: "Engineering Steel for Railway Projects",
+        subtitle:
+          "Precision-manufactured steel components supporting India’s expanding railway and metro networks.",
+
+        intro:
+          "Sri Chakra Industries manufactures structural steel components used in railway and metro infrastructure projects, meeting strict compliance, load, and durability requirements.",
+
+        capabilities: [
+          {
+            title: "Heavy Structural Fabrication",
+            description:
+              "Manufacturing of load-bearing steel members designed for long-span and high-stress railway applications.",
+          },
+          {
+            title: "Standards-Driven Production",
+            description:
+              "All components are produced in alignment with Indian Railway, RDSO, and IRC specifications.",
+          },
+          {
+            title: "Precision & Repeatability",
+            description:
+              "Consistent dimensional accuracy achieved through controlled fabrication and inspection processes.",
+          },
+        ],
+
+        fabricationTitle: "Railway-Grade Fabrication Capabilities",
+        fabricationDesc:
+          "Our manufacturing setup is equipped to handle demanding railway components with high precision and structural reliability.",
+        fabricationPoints: [
+          "High-strength steel processing",
+          "Controlled welding & forming",
+          "Dimensional inspection at every stage",
+          "Batch traceability and documentation",
+        ],
+
+        applicationsTitle: "Applications in Railway Projects",
+        applications: [
+          "Railway bridges & overpasses",
+          "Metro rail infrastructure",
+          "Track-side safety structures",
+          "Maintenance and service structures",
+        ],
+
+        standards: ["RDSO", "INDIAN RAILWAYS", "IRC", "ISO 9001"],
+
+        footnote:
+          "All railway components are manufactured based on approved drawings, specifications, and quality plans as required by project authorities.",
+
+        images: {
+          hero: "https://i.ibb.co/SXLhPmTh/railway-hro.jpg",
+          fabrication: "https://i.ibb.co/RkZVbSbb/steel-fabrication.jpg",
+        },
+      },
+      compliance: {
+        eyebrow: "CERTIFICATIONS & COMPLIANCE",
+
+        title: "Built to National & International Standards",
+
+        description:
+          "Every product manufactured at Sri Chakra Industries complies with approved standards, regulatory frameworks, and documented quality procedures required for infrastructure and public sector projects.",
+
+        standards: [
+          {
+            code: "RDSO",
+            description:
+              "Approved manufacturing practices and material compliance for Indian Railways projects.",
+          },
+          {
+            code: "IRC",
+            description:
+              "Design and fabrication aligned with Indian Roads Congress specifications.",
+          },
+          {
+            code: "MoRTH",
+            description:
+              "Manufacturing and supply in accordance with Ministry of Road Transport & Highways guidelines.",
+          },
+          {
+            code: "ISO 9001",
+            description:
+              "Certified quality management system ensuring consistency and traceability.",
+          },
+        ],
+
+        practiceTitle: "Compliance & Quality Practices",
+
+        practices: [
+          "Documented quality assurance and inspection plans",
+          "Batch-wise material traceability",
+          "Dimensional and visual inspection at every stage",
+          "Weld procedure qualification and testing",
+          "Calibration-controlled measuring instruments",
+          "Third-party and client inspections as required",
+        ],
+
+        footnote:
+          "Compliance documentation, test certificates, and inspection records are maintained and submitted as per project and statutory requirements.",
       },
     },
 
@@ -332,6 +519,7 @@ const translations = {
         items: [
           {
             title: "స్టీల్ రూఫింగ్ షీట్లు",
+            key: "roofing",
             image:
               "https://i.ibb.co/zVC57vd1/Whats-App-Image-2026-01-13-at-12-24-49-PM.jpg",
             description:
@@ -344,6 +532,7 @@ const translations = {
           },
           {
             title: "డబ్ల్యూ-బీమ్ క్రాష్ బారియర్లు",
+            key: "wbeam",
             image: "https://i.ibb.co/hFkVSjPt/w-beam-crash-barrier.jpg",
             description:
               "రహదారి భద్రతను మెరుగుపరచేందుకు రూపొందించిన డబ్ల్యూ-బీమ్ క్రాష్ బారియర్ వ్యవస్థలు.",
@@ -354,6 +543,196 @@ const translations = {
             ],
           },
         ],
+      },
+      details: {
+        color: "రంగు",
+        specsTitle: "సాంకేతిక లక్షణాలు",
+        sourceTitle: "ముడి పదార్థాల మూలం",
+        wbeamVisual: "హైవే భద్రత కోసం అధిక బలమైన W-బీమ్ వ్యవస్థ",
+
+        roofing: {
+          category: "స్టీల్ రూఫింగ్ వ్యవస్థ",
+          title: "రంగు పూత స్టీల్ రూఫింగ్ షీట్లు",
+          description:
+            "దీర్ఘకాలికత, తుప్పు నిరోధకత మరియు ఆకర్షణీయమైన రూపకల్పన కోసం రూపొందించిన స్టీల్ రూఫింగ్ షీట్లు.",
+          specs: [
+            "మందం: 0.1mm – 0.5mm",
+            "కస్టమర్ అవసరానికి అనుగుణంగా పొడవు",
+            "అనేక రంగుల పూత ఎంపికలు",
+            "అధిక బలం గల గాల్వనైజ్డ్ స్టీల్",
+          ],
+          source:
+            "భారత మరియు అంతర్జాతీయ ప్రమాణాలకు అనుగుణంగా ధృవీకరించబడిన ఉక్కు తయారీదారుల నుండి సరఫరా.",
+        },
+
+        wbeam: {
+          category: "రోడ్డు భద్రత మౌలిక సదుపాయాలు",
+          title: "W-బీమ్ క్రాష్ బ్యారియర్లు",
+          description:
+            "హైవే ప్రమాదాల సమయంలో శక్తిని శోషించేందుకు రూపొందించిన క్రాష్-పరీక్షిత W-బీమ్ గార్డ్‌రైల్స్.",
+          specs: [
+            "హాట్ డిప్ గాల్వనైజ్డ్ స్టీల్",
+            "MORTH & IRC ప్రమాణాలు",
+            "అధిక ప్రభావ నిరోధకత",
+            "హైవేలు మరియు ఎక్స్‌ప్రెస్‌వేలకు అనుకూలం",
+          ],
+          source:
+            "ఆమోదించబడిన సరఫరాదారుల నుండి నిర్మాణ-గ్రేడ్ స్టీల్‌తో తయారు చేయబడింది.",
+        },
+      },
+    },
+    manufacturing: {
+      processFlow: {
+        eyebrow: "తయారీ ప్రక్రియ",
+        title: "ఇంజినీరింగ్ ఆధారిత తయారీ విధానం",
+        description:
+          "శ్రీ చక్ర ఇండస్ట్రీస్‌లో తయారయ్యే ప్రతి ఉత్పత్తి బలము, ఖచ్చితత్వం మరియు జాతీయ ప్రమాణాలకు అనుగుణంగా నియంత్రిత దశల ద్వారా తయారు చేయబడుతుంది.",
+
+        steps: [
+          {
+            key: "raw-material",
+            title: "మూల పదార్థాల సేకరణ",
+            description:
+              "భారతీయ మరియు అంతర్జాతీయ ప్రమాణాలకు అనుగుణంగా సర్టిఫైడ్ స్టీల్ తయారీదారుల నుండి ఉన్నత నాణ్యత గల స్టీల్ కాయిల్స్ సేకరించబడతాయి.",
+          },
+          {
+            key: "processing",
+            title: "కాయిల్ ప్రాసెసింగ్ & స్లిట్టింగ్",
+            description:
+              "స్టీల్ కాయిల్స్ అవసరమైన వెడల్పులకు ఖచ్చితంగా కట్ చేయబడి ఫార్మింగ్‌కు సిద్ధం చేయబడతాయి.",
+          },
+          {
+            key: "forming",
+            title: "రోల్ ఫార్మింగ్ & ప్రొఫైలింగ్",
+            description:
+              "ఆధునిక రోల్ ఫార్మింగ్ యంత్రాలతో స్టీల్ షీట్లు మరియు W-బీమ్ ప్రొఫైల్స్ రూపొందించబడతాయి.",
+          },
+          {
+            key: "coating",
+            title: "గాల్వనైజేషన్ / ఉపరితల కోటింగ్",
+            description:
+              "తుప్పు నిరోధకత మరియు దీర్ఘకాలిక మన్నిక కోసం రక్షణాత్మక కోటింగ్ వర్తింపజేయబడుతుంది.",
+          },
+          {
+            key: "inspection",
+            title: "కొలతలు & నాణ్యత తనిఖీ",
+            description:
+              "ప్రతి బ్యాచ్‌పై కఠినమైన కొలతలు మరియు నాణ్యత తనిఖీలు నిర్వహించబడతాయి.",
+          },
+          {
+            key: "dispatch",
+            title: "ప్యాకింగ్ & సరఫరా",
+            description:
+              "తయారైన ఉత్పత్తులు సురక్షితంగా ప్యాక్ చేసి ప్రాజెక్ట్ స్థలాలకు పంపబడతాయి.",
+          },
+        ],
+      },
+    },
+    railway: {
+      overview: {
+        eyebrow: "రైల్వే మౌలిక సదుపాయాలు",
+
+        title: "రైల్వే ప్రాజెక్టుల కోసం ఇంజినీర్డ్ స్టీల్",
+
+        subtitle:
+          "భారతదేశంలో వేగంగా విస్తరిస్తున్న రైల్వే మరియు మెట్రో నెట్‌వర్క్‌లకు మద్దతుగా ఖచ్చితంగా తయారు చేసిన స్టీల్ భాగాలు.",
+
+        intro:
+          "శ్రీ చక్ర ఇండస్ట్రీస్ రైల్వే మరియు మెట్రో మౌలిక సదుపాయాల కోసం అవసరమైన నిర్మాణాత్మక స్టీల్ భాగాలను తయారు చేస్తుంది. ఈ భాగాలు కఠినమైన భద్రతా ప్రమాణాలు, లోడ్ అవసరాలు మరియు దీర్ఘకాలిక మన్నికను దృష్టిలో పెట్టుకొని తయారు చేయబడతాయి.",
+
+        capabilities: [
+          {
+            title: "హెవీ స్ట్రక్చరల్ ఫ్యాబ్రికేషన్",
+            description:
+              "రైల్వే వంతెనలు మరియు అధిక లోడ్ ఉన్న నిర్మాణాల కోసం బలమైన స్టీల్ భాగాల తయారీ.",
+          },
+          {
+            title: "ప్రమాణాల ఆధారిత తయారీ",
+            description:
+              "భారత రైల్వే, RDSO మరియు IRC ప్రమాణాలకు అనుగుణంగా అన్ని భాగాలు తయారు చేయబడతాయి.",
+          },
+          {
+            title: "ఖచ్చితత్వం & స్థిరత్వం",
+            description:
+              "ప్రతి దశలో నియంత్రిత తయారీ మరియు తనిఖీల ద్వారా కొలతల ఖచ్చితత్వం నిర్ధారించబడుతుంది.",
+          },
+        ],
+
+        fabricationTitle: "రైల్వే గ్రేడ్ తయారీ సామర్థ్యాలు",
+
+        fabricationDesc:
+          "మా తయారీ యూనిట్ రైల్వే రంగానికి అవసరమైన అధిక ఖచ్చితత్వం మరియు నిర్మాణాత్మక బలంతో భాగాలను తయారు చేయడానికి పూర్తిగా సిద్ధంగా ఉంది.",
+
+        fabricationPoints: [
+          "హై స్ట్రెంగ్త్ స్టీల్ ప్రాసెసింగ్",
+          "నియంత్రిత వెల్డింగ్ మరియు ఫార్మింగ్ ప్రక్రియలు",
+          "ప్రతి దశలో కొలతల తనిఖీ",
+          "బ్యాచ్ ట్రేసబిలిటీ మరియు డాక్యుమెంటేషన్",
+        ],
+
+        applicationsTitle: "రైల్వే ప్రాజెక్టులలో వినియోగాలు",
+
+        applications: [
+          "రైల్వే వంతెనలు మరియు ఓవర్‌బ్రిడ్జ్‌లు",
+          "మెట్రో రైలు మౌలిక సదుపాయాలు",
+          "ట్రాక్ సైడ్ భద్రతా నిర్మాణాలు",
+          "నిర్వహణ మరియు సేవా నిర్మాణాలు",
+        ],
+
+        standards: ["RDSO", "భారత రైల్వేలు", "IRC", "ISO 9001"],
+
+        footnote:
+          "అన్ని రైల్వే భాగాలు ప్రాజెక్ట్ అధికారుల ఆమోదించిన డ్రాయింగ్స్, స్పెసిఫికేషన్లు మరియు నాణ్యతా ప్రణాళికల ఆధారంగా తయారు చేయబడతాయి.",
+
+        images: {
+          hero: "https://i.ibb.co/SXLhPmTh/railway-hro.jpg",
+          fabrication: "https://i.ibb.co/RkZVbSbb/steel-fabrication.jpg",
+        },
+      },
+      compliance: {
+        eyebrow: "సర్టిఫికేషన్లు & అనుగుణ్యత",
+
+        title: "జాతీయ మరియు అంతర్జాతీయ ప్రమాణాలకు అనుగుణంగా",
+
+        description:
+          "శ్రీ చక్ర ఇండస్ట్రీస్‌లో తయారయ్యే ప్రతి ఉత్పత్తి మౌలిక సదుపాయాలు మరియు ప్రభుత్వ ప్రాజెక్టులకు అవసరమైన ఆమోదిత ప్రమాణాలు, నియంత్రణా విధానాలు మరియు నాణ్యతా ప్రక్రియలకు అనుగుణంగా ఉంటుంది.",
+
+        standards: [
+          {
+            code: "RDSO",
+            description:
+              "భారత రైల్వే ప్రాజెక్టుల కోసం ఆమోదిత తయారీ విధానాలు మరియు మెటీరియల్ అనుగుణ్యత.",
+          },
+          {
+            code: "IRC",
+            description:
+              "భారత రోడ్డు కాంగ్రెస్ నిర్దేశించిన డిజైన్ మరియు తయారీ ప్రమాణాలకు అనుగుణంగా.",
+          },
+          {
+            code: "MoRTH",
+            description:
+              "రహదారి రవాణా మరియు హైవే మంత్రిత్వ శాఖ మార్గదర్శకాలకు అనుగుణంగా తయారీ మరియు సరఫరా.",
+          },
+          {
+            code: "ISO 9001",
+            description:
+              "నాణ్యతా నిర్వహణ వ్యవస్థ సర్టిఫికేషన్ ద్వారా స్థిరత్వం మరియు ట్రేసబిలిటీ.",
+          },
+        ],
+
+        practiceTitle: "నాణ్యత & అనుగుణ్యత విధానాలు",
+
+        practices: [
+          "డాక్యుమెంటెడ్ నాణ్యతా భరోసా మరియు తనిఖీ ప్రణాళికలు",
+          "బ్యాచ్ వారీ మెటీరియల్ ట్రేసబిలిటీ",
+          "ప్రతి దశలో కొలతల మరియు దృశ్య తనిఖీలు",
+          "వెల్డింగ్ విధానాల అర్హత మరియు పరీక్షలు",
+          "కాలిబ్రేషన్ నియంత్రిత కొలత పరికరాలు",
+          "అవసరమైనప్పుడు మూడవ పక్షం మరియు కస్టమర్ తనిఖీలు",
+        ],
+
+        footnote:
+          "అన్ని అనుగుణ్యత డాక్యుమెంట్లు, పరీక్షా సర్టిఫికేట్లు మరియు తనిఖీ రికార్డులు ప్రాజెక్ట్ అవసరాలకు అనుగుణంగా నిర్వహించబడతాయి.",
       },
     },
 
@@ -515,6 +894,7 @@ const translations = {
         items: [
           {
             title: "स्टील रूफिंग शीट्स",
+            key: "roofing",
             image:
               "https://i.ibb.co/zVC57vd1/Whats-App-Image-2026-01-13-at-12-24-49-PM.jpg",
             description:
@@ -527,6 +907,7 @@ const translations = {
           },
           {
             title: "डब्ल्यू-बीम क्रैश बैरियर्स",
+            key: "wbeam",
             image: "https://i.ibb.co/hFkVSjPt/w-beam-crash-barrier.jpg",
             description:
               "सड़क सुरक्षा बढ़ाने के लिए डिज़ाइन किए गए डब्ल्यू-बीम क्रैश बैरियर सिस्टम।",
@@ -537,6 +918,196 @@ const translations = {
             ],
           },
         ],
+      },
+      details: {
+        color: "रंग",
+        specsTitle: "तकनीकी विनिर्देश",
+        sourceTitle: "कच्चे माल का स्रोत",
+        wbeamVisual: "उच्च शक्ति वाला W-बीम सुरक्षा सिस्टम",
+
+        roofing: {
+          category: "स्टील रूफिंग सिस्टम",
+          title: "कलर कोटेड स्टील रूफिंग शीट्स",
+          description:
+            "दीर्घकालिक मजबूती, जंग प्रतिरोध और सौंदर्य के लिए डिज़ाइन की गई स्टील रूफिंग शीट्स।",
+          specs: [
+            "मोटाई: 0.1mm – 0.5mm",
+            "ग्राहक आवश्यकता अनुसार कस्टम लंबाई",
+            "विभिन्न रंग विकल्प",
+            "उच्च तन्यता गैल्वनाइज्ड स्टील",
+          ],
+          source:
+            "भारतीय और अंतरराष्ट्रीय मानकों का पालन करने वाले प्रमाणित स्टील निर्माताओं से प्राप्त।",
+        },
+
+        wbeam: {
+          category: "सड़क सुरक्षा अवसंरचना",
+          title: "W-बीम क्रैश बैरियर्स",
+          description:
+            "हाईवे सुरक्षा के लिए डिज़ाइन किए गए क्रैश-टेस्टेड W-बीम गार्डरेल्स।",
+          specs: [
+            "हॉट डिप गैल्वनाइज्ड स्टील",
+            "MORTH और IRC मानकों के अनुरूप",
+            "उच्च प्रभाव प्रतिरोध",
+            "हाईवे और एक्सप्रेसवे के लिए उपयुक्त",
+          ],
+          source:
+            "स्वीकृत आपूर्तिकर्ताओं से प्राप्त संरचनात्मक ग्रेड स्टील से निर्मित।",
+        },
+      },
+    },
+    manufacturing: {
+      processFlow: {
+        eyebrow: "निर्माण प्रक्रिया",
+        title: "इंजीनियर्ड निर्माण कार्यप्रवाह",
+        description:
+          "श्री चक्र इंडस्ट्रीज़ में प्रत्येक उत्पाद को मजबूती, सटीकता और राष्ट्रीय मानकों के अनुरूप नियंत्रित चरणों में निर्मित किया जाता है।",
+
+        steps: [
+          {
+            key: "raw-material",
+            title: "कच्चे माल की आपूर्ति",
+            description:
+              "प्रमाणित स्टील निर्माताओं से उच्च गुणवत्ता वाले स्टील कॉइल्स प्राप्त किए जाते हैं।",
+          },
+          {
+            key: "processing",
+            title: "कॉइल प्रोसेसिंग एवं स्लिटिंग",
+            description:
+              "स्टील कॉइल्स को आवश्यक चौड़ाई में सटीक रूप से काटकर फॉर्मिंग के लिए तैयार किया जाता है।",
+          },
+          {
+            key: "forming",
+            title: "रोल फॉर्मिंग एवं प्रोफाइलिंग",
+            description:
+              "आधुनिक रोल फॉर्मिंग मशीनों द्वारा स्टील शीट्स और W-बीम प्रोफाइल तैयार किए जाते हैं।",
+          },
+          {
+            key: "coating",
+            title: "गैल्वनाइजेशन / सतह कोटिंग",
+            description:
+              "जंग प्रतिरोध और लंबी सेवा आयु के लिए सुरक्षात्मक कोटिंग की जाती है।",
+          },
+          {
+            key: "inspection",
+            title: "माप एवं गुणवत्ता निरीक्षण",
+            description:
+              "प्रत्येक बैच का कड़ाई से माप और गुणवत्ता परीक्षण किया जाता है।",
+          },
+          {
+            key: "dispatch",
+            title: "पैकिंग एवं डिस्पैच",
+            description:
+              "तैयार उत्पादों को सुरक्षित रूप से पैक कर साइट पर भेजा जाता है।",
+          },
+        ],
+      },
+    },
+    railway: {
+      overview: {
+        eyebrow: "रेलवे अवसंरचना",
+
+        title: "रेलवे परियोजनाओं के लिए इंजीनियर्ड स्टील",
+
+        subtitle:
+          "भारत के विस्तारित रेलवे और मेट्रो नेटवर्क को समर्थन देने के लिए सटीक रूप से निर्मित स्टील घटक।",
+
+        intro:
+          "श्री चक्र इंडस्ट्रीज़ रेलवे और मेट्रो अवसंरचना परियोजनाओं के लिए संरचनात्मक स्टील घटकों का निर्माण करती है। ये घटक कठोर सुरक्षा मानकों, भार आवश्यकताओं और दीर्घकालिक टिकाऊपन को ध्यान में रखकर डिज़ाइन किए जाते हैं।",
+
+        capabilities: [
+          {
+            title: "हेवी स्ट्रक्चरल फैब्रिकेशन",
+            description:
+              "रेलवे पुलों और उच्च भार सहने वाले संरचनाओं के लिए मजबूत स्टील घटकों का निर्माण।",
+          },
+          {
+            title: "मानक-आधारित उत्पादन",
+            description:
+              "सभी घटक भारतीय रेलवे, RDSO और IRC मानकों के अनुरूप निर्मित किए जाते हैं।",
+          },
+          {
+            title: "सटीकता और स्थिरता",
+            description:
+              "नियंत्रित फैब्रिकेशन और निरीक्षण प्रक्रियाओं के माध्यम से उच्च आयामी सटीकता सुनिश्चित की जाती है।",
+          },
+        ],
+
+        fabricationTitle: "रेलवे-ग्रेड निर्माण क्षमताएँ",
+
+        fabricationDesc:
+          "हमारी निर्माण सुविधा रेलवे परियोजनाओं के लिए आवश्यक उच्च सटीकता और संरचनात्मक विश्वसनीयता प्रदान करने में सक्षम है।",
+
+        fabricationPoints: [
+          "उच्च शक्ति स्टील प्रोसेसिंग",
+          "नियंत्रित वेल्डिंग और फॉर्मिंग",
+          "प्रत्येक चरण में आयामी निरीक्षण",
+          "बैच ट्रेसबिलिटी और प्रलेखन",
+        ],
+
+        applicationsTitle: "रेलवे परियोजनाओं में उपयोग",
+
+        applications: [
+          "रेलवे पुल और ओवरब्रिज",
+          "मेट्रो रेल अवसंरचना",
+          "ट्रैक साइड सुरक्षा संरचनाएँ",
+          "रखरखाव और सेवा संरचनाएँ",
+        ],
+
+        standards: ["RDSO", "INDIAN RAILWAYS", "IRC", "ISO 9001"],
+
+        footnote:
+          "सभी रेलवे घटक परियोजना प्राधिकरणों द्वारा स्वीकृत ड्रॉइंग, विनिर्देशों और गुणवत्ता योजनाओं के अनुसार निर्मित किए जाते हैं।",
+
+        images: {
+          hero: "https://i.ibb.co/SXLhPmTh/railway-hro.jpg",
+          fabrication: "https://i.ibb.co/RkZVbSbb/steel-fabrication.jpg",
+        },
+      },
+      compliance: {
+        eyebrow: "प्रमाणन एवं अनुपालन",
+
+        title: "राष्ट्रीय और अंतरराष्ट्रीय मानकों के अनुरूप",
+
+        description:
+          "श्री चक्र इंडस्ट्रीज़ में निर्मित प्रत्येक उत्पाद अवसंरचना और सार्वजनिक क्षेत्र की परियोजनाओं के लिए आवश्यक स्वीकृत मानकों, नियामक ढांचे और गुणवत्ता प्रक्रियाओं के अनुरूप होता है।",
+
+        standards: [
+          {
+            code: "RDSO",
+            description:
+              "भारतीय रेलवे परियोजनाओं के लिए स्वीकृत निर्माण प्रक्रियाएं और सामग्री अनुपालन।",
+          },
+          {
+            code: "IRC",
+            description:
+              "भारतीय सड़क कांग्रेस के विनिर्देशों के अनुसार डिजाइन और निर्माण।",
+          },
+          {
+            code: "MoRTH",
+            description:
+              "सड़क परिवहन और राजमार्ग मंत्रालय के दिशा-निर्देशों के अनुसार निर्माण और आपूर्ति।",
+          },
+          {
+            code: "ISO 9001",
+            description:
+              "स्थिरता और ट्रेसबिलिटी सुनिश्चित करने वाली प्रमाणित गुणवत्ता प्रबंधन प्रणाली।",
+          },
+        ],
+
+        practiceTitle: "अनुपालन एवं गुणवत्ता प्रक्रियाएँ",
+
+        practices: [
+          "दस्तावेजीकृत गुणवत्ता आश्वासन और निरीक्षण योजनाएँ",
+          "बैच-वार सामग्री ट्रेसबिलिटी",
+          "प्रत्येक चरण में आयामी और दृश्य निरीक्षण",
+          "वेल्डिंग प्रक्रिया योग्यता और परीक्षण",
+          "कैलिब्रेशन नियंत्रित मापन उपकरण",
+          "आवश्यकतानुसार तृतीय-पक्ष और ग्राहक निरीक्षण",
+        ],
+
+        footnote:
+          "सभी अनुपालन दस्तावेज़, परीक्षण प्रमाणपत्र और निरीक्षण रिकॉर्ड परियोजना एवं वैधानिक आवश्यकताओं के अनुसार बनाए रखे जाते हैं।",
       },
     },
 

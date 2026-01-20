@@ -1,7 +1,7 @@
 import { useLanguage } from "../../context/LanguageContext";
 import { useMediaQuery } from "react-responsive";
 
-const ProductsGrid = () => {
+const ProductsGrid = ({ onSelectProduct }) => {
   const { t } = useLanguage();
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
@@ -19,7 +19,11 @@ const ProductsGrid = () => {
           }}
         >
           {products.map((item, i) => (
-            <div key={i} style={styles.card}>
+            <div
+              key={item.key}
+              style={styles.card}
+              onClick={() => onSelectProduct(item.key)}
+            >
               {/* Image */}
               <div style={styles.imageWrap}>
                 <img
