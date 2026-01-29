@@ -79,6 +79,22 @@ const translations = {
         description:
           "Established with a vision to redefine infrastructure, Sri Chakra Industries stands at the forefront of precision engineering. We specialize in high-grade steel solutions that serve as the backbone for national progress, ensuring safety and durability in every project.",
       },
+      owner: {
+        kicker: "Founder & Leadership",
+        title: "The Visionary Behind",
+        description:
+          "Mr. C. Suresh Naidu is a distinguished entrepreneur and renowned railway contractor with decades of experience in infrastructure and development. He has successfully established multiple ventures including Suresh Constructions, Sree Chakra Apartment, Sree Sai Hanuman Towers, and Sri Lakshmi Cold Storage. With Sri Chakra Industries, he extends his legacy of excellence into the industrial sector, driven by innovation, integrity, and long-term vision.",
+        venturesTitle: "Diverse Business Ventures",
+        venturesText:
+          "Founder of several successful enterprises across construction, real estate, and cold storage infrastructure.",
+        leadershipTitle: "Respected Industry Leader",
+        leadershipText:
+          "Recognized as a trusted railway contractor known for reliability, precision, and large-scale project execution.",
+        visionTitle: "Future-Focused Vision",
+        visionText:
+          "Committed to building sustainable industries that generate growth, employment, and long-term societal value.",
+        signature: "C. Suresh Naidu — Founder & Managing Director",
+      },
       pillars: {
         crashBarriers: {
           title: "Highway Safety Systems",
@@ -446,6 +462,22 @@ const translations = {
         title: "మా గురించి",
         description:
           "మౌలిక సదుపాయాల పునర్నిర్వచనం లక్ష్యంగా స్థాపించబడిన శ్రీ చక్ర ఇండస్ట్రీస్, ఖచ్చితమైన ఇంజనీరింగ్‌లో అగ్రగామిగా నిలుస్తుంది. మేము జాతీయ పురోగతికి వెన్నెముకగా నిలిచే మరియు ప్రతి ప్రాజెక్ట్‌లో భద్రత మరియు మన్నికను నిర్ధారించే అధిక-గ్రేడ్ స్టీల్ పరిష్కారాలలో ప్రత్యేకత కలిగి ఉన్నాము.",
+      },
+      owner: {
+        kicker: "స్థాపకుడు & నాయకత్వం",
+        title: "ఈ దృష్టివంతుడి వెనుక ఉన్న నాయకుడు",
+        description:
+          "శ్రీ సి. సురేష్ నాయుడు గారు ప్రముఖ రైల్వే కాంట్రాక్టర్ మరియు అనుభవజ్ఞుడైన వ్యాపారవేత్త. సురేష్ కన్స్ట్రక్షన్స్, శ్రీ చక్ర అపార్ట్‌మెంట్, శ్రీ సాయి హనుమాన్ టవర్స్ మరియు శ్రీ లక్ష్మీ కోల్డ్ స్టోరేజ్ వంటి విజయవంతమైన సంస్థలను స్థాపించారు. శ్రీ చక్ర ఇండస్ట్రీస్ ద్వారా ఆయన తన విశిష్ట వారసత్వాన్ని పరిశ్రమ రంగంలోకి విస్తరించుతూ, నూతనత, నైతికత మరియు దీర్ఘకాల దృష్టితో ముందుకు తీసుకువెళుతున్నారు.",
+        venturesTitle: "వివిధ వ్యాపార సంస్థలు",
+        venturesText:
+          "నిర్మాణం, రియల్ ఎస్టేట్ మరియు కోల్డ్ స్టోరేజ్ రంగాల్లో అనేక విజయవంతమైన సంస్థలను స్థాపించారు.",
+        leadershipTitle: "గౌరవనీయ పరిశ్రమ నాయకుడు",
+        leadershipText:
+          "నమ్మకమైన మరియు నైపుణ్యం కలిగిన రైల్వే కాంట్రాక్టర్‌గా విస్తృత ప్రాజెక్టులను విజయవంతంగా నిర్వహించారు.",
+        visionTitle: "భవిష్యత్ దృష్టి",
+        visionText:
+          "సుస్థిర అభివృద్ధి, ఉపాధి మరియు సమాజ పురోగతికి తోడ్పడే పరిశ్రమలను నిర్మించాలనే సంకల్పం.",
+        signature: "సి. సురేష్ నాయుడు — స్థాపకుడు & మేనేజింగ్ డైరెక్టర్",
       },
       pillars: {
         crashBarriers: {
@@ -822,6 +854,22 @@ const translations = {
         title: "हमारे बारे में",
         description:
           "बुनियादी ढांचे को फिर से परिभाषित करने के दृष्टिकोण के साथ स्थापित, श्री चक्र इंडस्ट्रीज सटीक इंजीनियरिंग में सबसे आगे है। हम उच्च-श्रेणी के स्टील समाधानों में विशेषज्ञ हैं जो राष्ट्रीय प्रगति की रीढ़ के रूप में काम करते हैं, हर परियोजना में सुरक्षा और स्थायित्व सुनिश्चित करते हैं।",
+      },
+      owner: {
+        kicker: "संस्थापक एवं नेतृत्व",
+        title: "इस दूरदर्शी नेतृत्व के पीछे",
+        description:
+          "श्री सी. सुरेश नायडू एक प्रतिष्ठित उद्यमी और प्रसिद्ध रेलवे ठेकेदार हैं, जिनके पास अवसंरचना एवं विकास क्षेत्र में वर्षों का अनुभव है। उन्होंने सुरेश कंस्ट्रक्शंस, श्री चक्र अपार्टमेंट, श्री साई हनुमान टावर्स और श्री लक्ष्मी कोल्ड स्टोरेज जैसी सफल परियोजनाएँ स्थापित की हैं। श्री चक्र इंडस्ट्रीज के माध्यम से वे अपने उत्कृष्ट नेतृत्व को औद्योगिक क्षेत्र तक विस्तार दे रहे हैं, जो नवाचार, ईमानदारी और दीर्घकालिक दृष्टि पर आधारित है।",
+        venturesTitle: "विविध व्यावसायिक उपक्रम",
+        venturesText:
+          "निर्माण, रियल एस्टेट और कोल्ड स्टोरेज अवसंरचना में अनेक सफल उद्यमों की स्थापना की।",
+        leadershipTitle: "सम्मानित उद्योग नेता",
+        leadershipText:
+          "विश्वसनीय रेलवे ठेकेदार के रूप में बड़े पैमाने की परियोजनाओं के सफल निष्पादन के लिए प्रसिद्ध।",
+        visionTitle: "भविष्य की सोच",
+        visionText:
+          "सतत विकास, रोजगार सृजन और दीर्घकालिक सामाजिक मूल्य निर्माण के लिए समर्पित।",
+        signature: "सी. सुरेश नायडू — संस्थापक एवं प्रबंध निदेशक",
       },
       pillars: {
         crashBarriers: {

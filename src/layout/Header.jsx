@@ -1,309 +1,417 @@
-import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
-import { Menu } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
+import {
+  Building2,
+  ChevronDown,
+  Menu,
+  X,
+  Globe,
+  Home,
+  ArrowRight,
+} from "lucide-react";
 
-const Header = ({ onMenuToggle }) => {
+import { useLanguage } from "../context/LanguageContext";
+
+const HeaderPremium = ({ onMenuToggle, menuOpen }) => {
   const { lang, setLang } = useLanguage();
-  const [open, setOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [onDarkBg, setOnDarkBg] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const dropdownRef = useRef(null);
 
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isDesktop = useMediaQuery({ minWidth: 769 });
 
   const LANGS = [
-    { code: "en", label: "English", symbol: "EN" },
-    { code: "te", label: "తెలుగు", symbol: "అ" },
-    { code: "hi", label: "हिंदी", symbol: "हि" },
+    { code: "en", label: "English", native: "English", symbol: "EN" },
+    { code: "te", label: "తెలుగు", native: "Telugu", symbol: "తెల" },
+    { code: "hi", label: "हिंदी", native: "Hindi", symbol: "हि" },
   ];
 
-  /* ================= MOBILE HEADER ================= */
-  if (isMobile) {
-    return (
-      <nav style={styles.nav}>
-        <div style={styles.mobileHeader}>
-          {/* Logo */}
-          <div style={styles.mobileLogo}>
-            <div style={styles.logoBox}>
-              <img
-                src="/media/images/logos/logo.png"
-                alt="Sri Chakra Industries Logo"
-                style={styles.logoImage}
-                draggable={false}
-              />
-            </div>
+  const currentLang = LANGS.find((l) => l.code === lang);
+
+  /* ---------- INITIALIZATION & HYDRATION ---------- */
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  /* ---------- SCROLL LOGIC ---------- */
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* ---------- DARK BACKGROUND DETECTION (Intersection Observer) ---------- */
+  useEffect(() => {
+    const updateDarkState = () => {
+      const darkSections = document.querySelectorAll("[data-dark]");
+
+      let isDark = false;
+
+      darkSections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+
+        // Header occupies roughly top 100px of viewport
+        const headerZoneTop = 0;
+        const headerZoneBottom = 120;
+
+        const overlapsHeader =
+          rect.top < headerZoneBottom && rect.bottom > headerZoneTop;
+
+        if (overlapsHeader) {
+          isDark = true;
+        }
+      });
+
+      setOnDarkBg(isDark);
+    };
+
+    updateDarkState();
+
+    window.addEventListener("scroll", updateDarkState, { passive: true });
+    window.addEventListener("resize", updateDarkState);
+
+    return () => {
+      window.removeEventListener("scroll", updateDarkState);
+      window.removeEventListener("resize", updateDarkState);
+    };
+  }, []);
+
+  /* ---------- CLICK OUTSIDE HANDLER ---------- */
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  if (!mounted) return null;
+
+  const isDarkMode = menuOpen || onDarkBg;
+
+  // Theme configuration based on background contrast
+  const headerTheme = isDarkMode
+    ? {
+        text: "#ffffff",
+        border: "rgba(255,255,255,0.25)",
+        bg: "rgba(0,33,71,0.25)",
+        dropdownBg: "#001a38",
+      }
+    : {
+        text: "#002147",
+        border: "rgba(0,33,71,0.15)",
+        bg: "rgba(255,255,255,0.15)",
+        dropdownBg: "#ffffff",
+      };
+  return (
+    <motion.header
+      animate={{
+        top: scrolled ? "4%" : "3%",
+        backgroundColor: headerTheme.bg,
+        backdropFilter: "blur(12px)",
+      }}
+      transition={{ duration: 0.25 }}
+      style={{
+        ...styles.header,
+        borderColor: headerTheme.border,
+      }}
+    >
+      <div style={isMobile ? styles.mobileContainer : styles.desktopContainer}>
+        {/* ================= LEFT: BRANDING ================= */}
+        <a href="/" style={styles.brandSection}>
+          <div style={isMobile ? styles.mobileLogoBox : styles.desktopLogoBox}>
+            <img
+              src="./media/images/logos/logo_no_bg.png"
+              alt="Sri Chakra Logo"
+              style={styles.logoImage}
+              draggable={false}
+            />
           </div>
 
-          {/* Language buttons */}
-          <div style={styles.mobileLangBar}>
-            {LANGS.map((l) => (
+          <div style={styles.brandTextWrapper}>
+            <h1 style={{ ...styles.brandTitle, color: headerTheme.text }}>
+              SRI CHAKRA {isMobile ? "" : "INDUSTRIES"}
+            </h1>
+            <p
+              style={{
+                ...styles.brandSubtitle,
+                color: onDarkBg ? "#94a3b8" : "#64748b",
+              }}
+            >
+              {isMobile ? "INDUSTRIES PVT LTD" : "Private Limited • Est. 2024"}
+            </p>
+          </div>
+        </a>
+
+        {/* ================= RIGHT: CONTROLS ================= */}
+        <div style={styles.controlsSection}>
+          {/* DESKTOP LANGUAGE SELECTOR */}
+          {isDesktop && (
+            <div style={styles.relative} ref={dropdownRef}>
               <button
-                key={l.code}
-                onClick={() => setLang(l.code)}
+                onClick={() => setLangOpen(!langOpen)}
                 style={{
-                  ...styles.mobileLangBtn,
-                  background: lang === l.code ? "#002147" : "transparent",
-                  color: lang === l.code ? "#fff" : "#002147",
+                  ...styles.langBtn,
+                  color: headerTheme.text,
+                  borderColor: headerTheme.border,
                 }}
               >
-                {l.symbol}
-              </button>
-            ))}
-          </div>
-
-          {/* Menu */}
-          <button
-            onClick={onMenuToggle}
-            style={styles.mobileMenuBtn}
-            type="button"
-          >
-            <Menu size={22} />
-          </button>
-        </div>
-      </nav>
-    );
-  }
-
-  /* ================= DESKTOP HEADER ================= */
-  return (
-    <nav style={styles.nav}>
-      {/* Logo */}
-      <div style={styles.logoWrapper}>
-        <div style={styles.logoBox}>
-          <img
-            src="/media/images/logos/logo.png"
-            alt="Sri Chakra Industries Logo"
-            style={styles.logoImage}
-            draggable={false}
-          />
-        </div>
-        <span style={styles.logoText}>SRI CHAKRA</span>
-      </div>
-
-      <div style={styles.rightControls}>
-        {/* Language Dropdown */}
-        <div style={styles.langWrapper}>
-          <button
-            type="button"
-            onClick={() => setOpen((prev) => !prev)}
-            style={styles.langCurrent}
-          >
-            {LANGS.find((l) => l.code === lang)?.symbol}
-          </button>
-
-          {open && (
-            <div style={styles.langDropdown}>
-              {LANGS.map((l) => (
-                <button
-                  key={l.code}
-                  type="button"
-                  onClick={() => {
-                    setLang(l.code);
-                    setOpen(false); // close after selection
-                  }}
+                <Globe size={16} />
+                <span>{currentLang?.native}</span>
+                <ChevronDown
+                  size={14}
                   style={{
-                    ...styles.langOption,
-                    opacity: lang === l.code ? 0.5 : 1,
+                    transform: langOpen ? "rotate(180deg)" : "none",
+                    transition: "transform 0.2s ease",
                   }}
-                >
-                  <span style={styles.langSymbol}>{l.symbol}</span>
-                  <span style={styles.langLabel}>{l.label}</span>
-                </button>
-              ))}
+                />
+              </button>
+
+              <AnimatePresence>
+                {langOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    style={{
+                      ...styles.dropdownMenu,
+                      background: headerTheme.dropdownBg,
+                    }}
+                  >
+                    {LANGS.map((l) => (
+                      <button
+                        key={l.code}
+                        onClick={() => {
+                          setLang(l.code);
+                          setLangOpen(false);
+                        }}
+                        style={{
+                          ...styles.dropdownItem,
+                          color: headerTheme.text,
+                          background:
+                            lang === l.code
+                              ? "rgba(0,33,71,0.08)"
+                              : "transparent",
+                        }}
+                      >
+                        {l.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           )}
-        </div>
 
-        {/* Menu */}
-        <button onClick={onMenuToggle} style={styles.menuBtn} type="button">
-          <Menu size={22} />
-          <span style={styles.menuText}>SYSTEM MENU</span>
-        </button>
+          {/* MENU TOGGLE (Hamburger Icon) */}
+          <button
+            onClick={onMenuToggle}
+            style={{
+              ...styles.menuIconButton,
+              background: isDarkMode ? "rgba(255,255,255,0.2)" : "#002147",
+
+              color: "#fff",
+            }}
+          >
+            <Menu size={isMobile ? 22 : 24} strokeWidth={2.5} />
+          </button>
+        </div>
       </div>
-    </nav>
+
+      {/* ================= MOBILE LANGUAGE BAR (PILLS) ================= */}
+      {isMobile && (
+        <div style={styles.mobileLangBar}>
+          {LANGS.map((l) => (
+            <LangPill
+              key={l.code}
+              code={l.code}
+              label={l.symbol}
+              onDarkBg={isDarkMode}
+              isActive={lang === l.code}
+              onClick={() => setLang(l.code)}
+            />
+          ))}
+        </div>
+      )}
+    </motion.header>
   );
 };
 
-export default Header;
+/* ===== SUB-COMPONENT: MOBILE LANGUAGE PILLS ===== */
+const LangPill = ({ label, onDarkBg, isActive, onClick }) => {
+  const pillStyle = {
+    padding: "6px 16px",
+    fontSize: 12,
+    fontWeight: 700,
+    borderRadius: 999,
+    cursor: "pointer",
+    transition: "all 0.25s ease",
+    border: isActive
+      ? "none"
+      : `2px solid ${onDarkBg ? "rgba(255,255,255,0.5)" : "rgba(0,33,71,0.3)"}`,
+    background: isActive
+      ? "linear-gradient(135deg, #002147, #003d7a)"
+      : "transparent",
+    color: isActive ? "#fff" : onDarkBg ? "#fff" : "#002147",
+    boxShadow: isActive ? "0 4px 12px rgba(0,33,71,0.3)" : "none",
+  };
 
+  return (
+    <button onClick={onClick} style={pillStyle}>
+      {label}
+    </button>
+  );
+};
+
+/* ================= COMPONENT STYLES ================= */
 const styles = {
-  nav: {
+  header: {
     position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    zIndex: 60,
-    padding: "14px 16px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+    left: 16,
+    right: 16,
+    zIndex: 1000,
+    borderRadius: 22,
+    border: "1px solid",
+    overflow: "hidden",
     boxSizing: "border-box",
-    pointerEvents: "auto", // ✅ FIX
+    top: "15%",
   },
-
-  logoWrapper: {
+  desktopContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "12px 32px",
+    maxWidth: "1400px",
+    margin: "0 auto",
+  },
+  mobileContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "10px 16px",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  brandSection: {
     display: "flex",
     alignItems: "center",
     gap: "12px",
-    background: "rgba(255,255,255,0.85)",
-    backdropFilter: "blur(12px)",
-    padding: "10px 18px",
-    border: "1px solid rgba(0,33,71,0.12)",
-    pointerEvents: "auto",
+    textDecoration: "none",
+    minWidth: 0,
+    flexShrink: 1,
+  },
+  mobileLogoBox: {
+    width: 52,
+    height: 52,
+    background: "transparent",
+    borderRadius: "10px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  desktopLogoBox: {
+    width: 68,
+    height: 68,
+    background: "transparent",
+    borderRadius: "14px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
   },
   logoImage: {
     width: "100%",
     height: "100%",
-    objectFit: "contain",
+    filter: "brightness(1) invert(0)",
+  },
+  brandTextWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    minWidth: 0,
+  },
+  brandTitle: {
+    fontFamily: "'Outfit', sans-serif",
+    fontSize: "16px",
+    fontWeight: "800",
+    margin: 0,
+    letterSpacing: "0.5px",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  brandSubtitle: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "9px",
+    margin: 0,
+    fontWeight: "600",
+    textTransform: "uppercase",
+    letterSpacing: "0.3px",
+  },
+  controlsSection: {
+    display: "flex",
+    alignItems: "center",
+    gap: "14px",
+    flexShrink: 0,
+  },
+  relative: { position: "relative" },
+  langBtn: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "8px 14px",
+    background: "transparent",
+    border: "1px solid",
+    borderRadius: "10px",
+    cursor: "pointer",
+    fontWeight: "600",
+    fontSize: "14px",
+  },
+  dropdownMenu: {
+    position: "absolute",
+    top: "calc(100% + 10px)",
+    right: 0,
+    borderRadius: "14px",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+    padding: "8px",
+    minWidth: "140px",
+    border: "1px solid rgba(0,33,71,0.1)",
+    zIndex: 1001,
+  },
+  dropdownItem: {
+    width: "100%",
+    padding: "10px 14px",
+    textAlign: "left",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: "500",
     display: "block",
   },
-
-  logoBox: {
-    width: 50,
-    height: 50,
-    background: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  logoLetter: {
-    color: "#fff",
-    fontFamily: "serif",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-
-  logoText: {
-    fontFamily: "serif",
-    fontWeight: "bold",
-    fontSize: 18,
-    color: "#002147",
-  },
-
-  rightControls: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    pointerEvents: "auto",
-  },
-
-  /* ===== Desktop Dropdown ===== */
-
-  langWrapper: {
-    position: "relative",
-  },
-
-  langCurrent: {
-    width: 42,
-    height: 42,
-    border: "1px solid rgba(0,33,71,0.2)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontFamily: "serif",
-    fontSize: 16,
-    background: "rgba(255,255,255,0.85)",
-    cursor: "pointer",
-  },
-
-  langDropdown: {
-    position: "absolute",
-    top: "48px",
-    right: 0,
-    width: "140px",
-    background: "#fff",
-    border: "1px solid rgba(0,33,71,0.15)",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
-  },
-
-  langOption: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    padding: "10px 12px",
-    cursor: "pointer",
-    width: "100%",
-    background: "transparent",
+  menuIconButton: {
     border: "none",
-    textAlign: "left",
-  },
-
-  langSymbol: {
-    fontFamily: "serif",
-    fontSize: 16,
-    color: "#002147",
-    width: 28,
-    textAlign: "center",
-  },
-
-  langLabel: {
-    fontSize: 13,
-    color: "#002147",
-  },
-
-  /* ===== Mobile Language Bar ===== */
-
-  mobileHeaderBar: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-  },
-  mobileHeader: {
-    width: "100%",
+    padding: "8px",
+    borderRadius: "10px",
+    cursor: "pointer",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "12px",
+    transition: "transform 0.2s ease, opacity 0.2s ease",
+    boxShadow: "0 4px 12px rgba(0,33,71,0.2)",
   },
-  mobileLogo: {
-    background: "rgba(255,255,255,0.9)",
-    border: "1px solid rgba(0,33,71,0.12)",
-    padding: "6px",
-  },
-
   mobileLangBar: {
     display: "flex",
-    gap: "4px",
-    padding: "4px 6px",
-    background: "rgba(255,255,255,0.85)",
-    border: "1px solid rgba(0,33,71,0.12)",
-  },
-
-  mobileLangBtn: {
-    width: 30,
-    height: 28,
-    border: "none",
-    fontFamily: "serif",
-    fontSize: 13,
-    cursor: "pointer",
-  },
-
-  mobileMenuBtn: {
-    background: "#002147",
-    color: "#fff",
-    border: "none",
-    padding: "12px", // 👈 better tap target
-    display: "flex",
-    alignItems: "center",
     justifyContent: "center",
-  },
-
-  /* ===== Menu ===== */
-
-  menuBtn: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    background: "#002147",
-    color: "#fff",
-    padding: "12px 16px",
-    border: "none",
-    cursor: "pointer",
-    whiteSpace: "nowrap",
-  },
-
-  menuText: {
-    fontFamily: "monospace",
-    fontSize: 10,
-    letterSpacing: "0.3em",
+    gap: "12px",
+    padding: "2px 0 14px",
   },
 };
+
+export default HeaderPremium;

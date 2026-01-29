@@ -9,7 +9,7 @@ const Compliance = () => {
   const practices = t("railway.compliance.practices");
 
   return (
-    <section style={styles.section} data-theme="dark">
+    <section style={styles.section} data-dark="true">
       <div style={styles.container}>
         {/* HEADER */}
         <div style={styles.header}>
