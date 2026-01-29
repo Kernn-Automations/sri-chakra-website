@@ -20,7 +20,7 @@ const RailwayOverview = () => {
   const images = t("railway.overview.images");
 
   return (
-    <section style={styles.section} data-theme="dark">
+    <section style={styles.section} data-dark="true">
       <div style={styles.container}>
         {/* ================= HEADER ================= */}
         <div style={styles.header}>

@@ -9,6 +9,7 @@ import Crosshair from "../ui/Crosshair";
 import PageTransition from "../ui/PageTransition";
 import Header from "../layout/Header";
 import WhatsAppFloat from "../layout/WhatsAppFloat";
+import ScrollBarrier from "../ui/ScrollBarrier";
 
 const App = () => {
   const [isSystemMenuOpen, setIsSystemMenuOpen] = useState(false);
@@ -20,15 +21,18 @@ const App = () => {
         {/* Background layer */}
         <BlueprintGrid />
         <Crosshair />
+        <ScrollBarrier />
         <Header
+          menuOpen={isSystemMenuOpen}
           onMenuToggle={() => {
             setTriggerTransition(true);
 
             setTimeout(() => {
               setIsSystemMenuOpen(true);
-            }, 450); // must match transition timing
+            }, 450);
           }}
         />
+
         <SystemMenu
           open={isSystemMenuOpen}
           onClose={() => setIsSystemMenuOpen(false)}

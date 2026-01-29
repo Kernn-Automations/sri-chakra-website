@@ -37,6 +37,7 @@ const PageTransition = ({ children, trigger }) => {
           ...styles.overlay,
           transform: active ? "translateY(0%)" : "translateY(100%)",
         }}
+        data-dark="true"
       />
 
       {/* Page Content */}
