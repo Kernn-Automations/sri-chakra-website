@@ -4,7 +4,7 @@ import CircularSection from "../sections/home/CircularSection";
 import Metrics from "../sections/home/Metrics";
 import Origin from "../sections/home/Origin";
 import IndustryTicker from "../sections/home/IndustryTicker";
-import SteelShowcaseSlider from "../sections/home/SteelShowCaseSlider";
+import SteelShowcaseSlider from "../sections/home/SteelShowcaseSlider";
 import QualityCertifications from "../sections/home/QualityCertifications";
 import SafetyEquation from "../sections/home/SafetyEquation";
 
