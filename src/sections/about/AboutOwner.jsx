@@ -1,56 +1,152 @@
 import { useMediaQuery } from "react-responsive";
 import { Award, Building2, Briefcase } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AboutOwner = () => {
   const { t } = useLanguage();
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
+  const sectionRef = useRef(null);
+  const imageRef = useRef(null);
+  const titleRef = useRef(null);
+  const descRef = useRef(null);
+  const valuesRef = useRef([]);
+  const sigLineRef = useRef(null);
+  const bgLightRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Background soft spotlight movement
+      gsap.to(bgLightRef.current, {
+        x: "15%",
+        y: "10%",
+        duration: 8,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+
+      // Image pop fade
+      gsap.from(imageRef.current, {
+        scale: 0.85,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+      });
+
+      // Title reveal
+      gsap.from(titleRef.current, {
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+      });
+
+      // Description reveal
+      gsap.from(descRef.current, {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        delay: 0.2,
+        ease: "power3.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+      });
+
+      // Value cards pop in
+      gsap.from(valuesRef.current, {
+        y: 50,
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "back.out(1.4)",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 70%" },
+      });
+
+      // Signature line draw
+      gsap.fromTo(
+        sigLineRef.current,
+        { width: 0 },
+        {
+          width: 80,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 70%" },
+        },
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section style={styles.section}>
+    <section style={styles.section} ref={sectionRef}>
+      {/* Soft spotlight background */}
+      <div style={styles.bgLight} ref={bgLightRef} />
+
       <div style={styles.container}>
         {/* LEFT — IMAGE */}
         <div style={styles.imageWrap}>
-          <div style={styles.imageGlow} />
-          <img
-            src="./media/images/owner.jpeg" // replace with real image
-            alt="C. Suresh Naidu"
-            style={styles.image}
-            draggable={false}
-          />
+          <div style={styles.imageRing}>
+            <img
+              ref={imageRef}
+              src="./media/images/owner.jpeg"
+              alt="Owner"
+              style={styles.image}
+              draggable={false}
+            />
+          </div>
         </div>
 
         {/* RIGHT — CONTENT */}
         <div style={styles.content}>
           <p style={styles.kicker}>{t("about.owner.kicker")}</p>
 
-          <h2 style={styles.title}>
+          <h2 style={styles.title} ref={titleRef}>
             {t("about.owner.title")}{" "}
             <span style={styles.highlight}>Sri Chakra Industries</span>
           </h2>
 
-          <p style={styles.description}>{t("about.owner.description")}</p>
+          <p style={styles.description} ref={descRef}>
+            {t("about.owner.description")}
+          </p>
 
           <div style={styles.valuesGrid}>
-            <ValueItem
-              icon={<Briefcase size={20} />}
-              title={t("about.owner.venturesTitle")}
-              text={t("about.owner.venturesText")}
-            />
-            <ValueItem
-              icon={<Building2 size={20} />}
-              title={t("about.owner.leadershipTitle")}
-              text={t("about.owner.leadershipText")}
-            />
-            <ValueItem
-              icon={<Award size={20} />}
-              title={t("about.owner.visionTitle")}
-              text={t("about.owner.visionText")}
-            />
+            {[
+              {
+                icon: <Briefcase size={20} />,
+                title: t("about.owner.venturesTitle"),
+                text: t("about.owner.venturesText"),
+              },
+              {
+                icon: <Building2 size={20} />,
+                title: t("about.owner.leadershipTitle"),
+                text: t("about.owner.leadershipText"),
+              },
+              {
+                icon: <Award size={20} />,
+                title: t("about.owner.visionTitle"),
+                text: t("about.owner.visionText"),
+              },
+            ].map((item, i) => (
+              <ValueItem
+                key={i}
+                {...item}
+                ref={(el) => (valuesRef.current[i] = el)}
+              />
+            ))}
           </div>
 
           <div style={styles.signatureWrap}>
-            <div style={styles.signatureLine} />
+            <div style={styles.signatureLine} ref={sigLineRef} />
             <p style={styles.signatureName}>{t("about.owner.signature")}</p>
           </div>
         </div>
@@ -59,15 +155,15 @@ const AboutOwner = () => {
   );
 };
 
-const ValueItem = ({ icon, title, text }) => (
-  <div style={styles.valueCard}>
+const ValueItem = React.forwardRef(({ icon, title, text }, ref) => (
+  <div style={styles.valueCard} ref={ref}>
     <div style={styles.valueIcon}>{icon}</div>
     <div>
       <h4 style={styles.valueTitle}>{title}</h4>
       <p style={styles.valueText}>{text}</p>
     </div>
   </div>
-);
+));
 
 export default AboutOwner;
 
@@ -92,20 +188,31 @@ const styles = {
   },
   imageGlow: {
     position: "absolute",
-    width: 320,
-    height: 320,
+    width: 360,
+    height: 360,
     borderRadius: "50%",
-    background: "radial-gradient(circle, rgba(0,33,71,0.15), transparent 70%)",
+    //background:
+    //  "radial-gradient(circle, rgba(255,215,0,0.35), rgba(212,175,55,0.18), transparent 70%)",
     zIndex: 0,
+    animation: "goldGlowPulse 3.5s ease-in-out infinite",
   },
+
+  imageRing: {
+    padding: 6,
+    borderRadius: "50%",
+    background: "linear-gradient(135deg, #d4af37, #ffd700, #b8860b)",
+    boxShadow: "0 0 25px rgba(212,175,55,0.6)",
+    animation: "goldPulse 2.8s ease-in-out infinite",
+    display: "inline-block",
+  },
+
   image: {
-    width: 320,
-    height: 320,
+    width: 308,
+    height: 308,
     objectFit: "cover",
-    borderRadius: "24px",
-    position: "relative",
-    zIndex: 1,
-    boxShadow: "0 20px 60px rgba(0,33,71,0.15)",
+    borderRadius: "50%",
+    display: "block",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
   },
 
   content: {

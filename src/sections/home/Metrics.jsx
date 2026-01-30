@@ -109,7 +109,7 @@ const styles = {
   eyebrowLine: {
     width: 48,
     height: 2,
-    background: "linear-gradient(90deg, #FFD700, transparent)",
+    background: "linear-gradient(90deg, #c2410c, transparent)",
   },
 
   eyebrow: {
@@ -117,7 +117,7 @@ const styles = {
     fontSize: 11,
     fontWeight: 700,
     letterSpacing: "0.25em",
-    color: "#FFD700",
+    color: "#c2410c",
     textTransform: "uppercase",
   },
 
@@ -186,6 +186,6 @@ const styles = {
     position: "absolute",
     width: 14,
     height: 14,
-    borderColor: "#FFD700",
+    borderColor: "#c2410c",
   },
 };

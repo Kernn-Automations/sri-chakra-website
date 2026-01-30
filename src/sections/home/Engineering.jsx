@@ -118,7 +118,7 @@ const Engineering = () => {
           duration: 1,
           ease: "power3.out",
         },
-        "-=0.6"
+        "-=0.6",
       );
     }, sectionRef);
 
@@ -327,7 +327,7 @@ const styles = {
   eyebrowLine: {
     width: 40,
     height: 2,
-    background: "linear-gradient(90deg, #FFD700 0%, transparent 100%)",
+    background: "linear-gradient(90deg, #c2410c 0%, transparent 100%)",
   },
 
   eyebrow: {
@@ -335,7 +335,7 @@ const styles = {
     fontSize: 11,
     fontWeight: 700,
     letterSpacing: "0.2em",
-    color: "#FFD700",
+    color: "#c2410c",
     textTransform: "uppercase",
   },
 
@@ -376,7 +376,7 @@ const styles = {
     fontFamily: "'Courier New', monospace",
     fontSize: 20,
     fontWeight: 700,
-    color: "#FFD700",
+    color: "#c2410c",
     minWidth: 36,
     textAlign: "right",
   },
@@ -467,7 +467,7 @@ const styles = {
     width: "50%",
     height: "50%",
     borderRadius: "50%",
-    border: "3px solid #FFD700",
+    border: "3px solid #c2410c",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -489,7 +489,7 @@ const styles = {
     fontFamily: "'Courier New', monospace",
     fontSize: 16,
     fontWeight: 700,
-    color: "#FFD700",
+    color: "#c2410c",
   },
 
   measurementLineH: {
@@ -530,7 +530,7 @@ const styles = {
     width: 8,
     height: 8,
     borderRadius: "50%",
-    background: "#FFD700",
+    background: "#c2410c",
     boxShadow: "0 0 8px rgba(255,215,0,0.5)",
   },
 

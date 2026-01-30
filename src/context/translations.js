@@ -93,7 +93,7 @@ const translations = {
         visionTitle: "Future-Focused Vision",
         visionText:
           "Committed to building sustainable industries that generate growth, employment, and long-term societal value.",
-        signature: "C. Suresh Naidu — Founder & Managing Director",
+        signature: "C. Suresh Naidu — Managing Director",
       },
       pillars: {
         crashBarriers: {
@@ -477,7 +477,7 @@ const translations = {
         visionTitle: "భవిష్యత్ దృష్టి",
         visionText:
           "సుస్థిర అభివృద్ధి, ఉపాధి మరియు సమాజ పురోగతికి తోడ్పడే పరిశ్రమలను నిర్మించాలనే సంకల్పం.",
-        signature: "సి. సురేష్ నాయుడు — స్థాపకుడు & మేనేజింగ్ డైరెక్టర్",
+        signature: "సి. సురేష్ నాయుడు — మేనేజింగ్ డైరెక్టర్",
       },
       pillars: {
         crashBarriers: {
@@ -869,7 +869,7 @@ const translations = {
         visionTitle: "भविष्य की सोच",
         visionText:
           "सतत विकास, रोजगार सृजन और दीर्घकालिक सामाजिक मूल्य निर्माण के लिए समर्पित।",
-        signature: "सी. सुरेश नायडू — संस्थापक एवं प्रबंध निदेशक",
+        signature: "सी. सुरेश नायडू — प्रबंध निदेशक",
       },
       pillars: {
         crashBarriers: {

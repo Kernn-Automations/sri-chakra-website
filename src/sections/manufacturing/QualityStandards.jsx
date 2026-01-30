@@ -80,7 +80,7 @@ const styles = {
     fontFamily: "monospace",
     fontSize: 11,
     letterSpacing: "0.3em",
-    color: "#FFD700",
+    color: "#c2410c",
     marginBottom: 16,
     display: "inline-block",
   },
@@ -105,7 +105,7 @@ const styles = {
   },
 
   block: {
-    borderLeft: "4px solid #FFD700",
+    borderLeft: "4px solid #c2410c",
     paddingLeft: 24,
   },
 

@@ -17,7 +17,10 @@ const RailwayOverview = () => {
   const { t } = useLanguage();
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
-  const images = t("railway.overview.images");
+  const images = {
+    hero: "https://i.ibb.co/SXLhPmTh/railway-hro.jpg",
+    fabrication: "https://i.ibb.co/RkZVbSbb/steel-fabrication.jpg",
+  };
 
   return (
     <section style={styles.section} data-dark="true">

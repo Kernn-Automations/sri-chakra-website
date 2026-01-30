@@ -135,8 +135,14 @@ const HeaderPremium = ({ onMenuToggle, menuOpen }) => {
           </div>
 
           <div style={styles.brandTextWrapper}>
-            <h1 style={{ ...styles.brandTitle, color: headerTheme.text }}>
-              SRI CHAKRA {isMobile ? "" : "INDUSTRIES"}
+            <h1
+              style={{
+                ...styles.brandTitle,
+                color: headerTheme.text,
+                fontSize: isMobile ? "12px" : "16px",
+              }}
+            >
+              SRI CHAKRA INDUSTRIES
             </h1>
             <p
               style={{
@@ -144,7 +150,7 @@ const HeaderPremium = ({ onMenuToggle, menuOpen }) => {
                 color: onDarkBg ? "#94a3b8" : "#64748b",
               }}
             >
-              {isMobile ? "INDUSTRIES PVT LTD" : "Private Limited • Est. 2024"}
+              Private Limited • Est. 2024
             </p>
           </div>
         </a>
@@ -278,7 +284,7 @@ const styles = {
     zIndex: 1000,
     borderRadius: 22,
     border: "1px solid",
-    overflow: "hidden",
+    overflow: "visible",
     boxSizing: "border-box",
     top: "15%",
   },
@@ -338,7 +344,6 @@ const styles = {
   },
   brandTitle: {
     fontFamily: "'Outfit', sans-serif",
-    fontSize: "16px",
     fontWeight: "800",
     margin: 0,
     letterSpacing: "0.5px",

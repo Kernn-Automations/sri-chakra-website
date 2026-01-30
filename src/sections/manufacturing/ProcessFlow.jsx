@@ -81,7 +81,7 @@ const styles = {
     fontFamily: "monospace",
     fontSize: 11,
     letterSpacing: "0.35em",
-    color: "#FFD700",
+    color: "#c2410c",
     marginBottom: 18,
     display: "inline-block",
   },
@@ -122,7 +122,7 @@ const styles = {
     fontFamily: "monospace",
     fontSize: 11,
     letterSpacing: "0.25em",
-    color: "#FFD700",
+    color: "#c2410c",
     marginBottom: 18,
     opacity: 0.9,
   },
@@ -153,12 +153,12 @@ const styles = {
     width: 6,
     height: 6,
     borderRadius: "50%",
-    background: "#FFD700",
+    background: "#c2410c",
   },
 
   connectorLine: {
     width: 42,
     height: 1,
-    background: "linear-gradient(90deg,#FFD700,transparent)",
+    background: "linear-gradient(90deg,#c2410c,transparent)",
   },
 };

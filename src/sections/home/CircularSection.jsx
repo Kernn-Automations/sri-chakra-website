@@ -57,19 +57,19 @@ const CircularSection = () => {
     tl.fromTo(
       headerRef.current,
       { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
     )
       .fromTo(
         systemAnimRef.current,
         { opacity: 0, scale: 0.92 },
         { opacity: 1, scale: 1, duration: 1, ease: "power3.out" },
-        "-=0.4"
+        "-=0.4",
       )
       .fromTo(
         detailRef.current,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-        "-=0.5"
+        "-=0.5",
       );
 
     return () => {
@@ -196,14 +196,14 @@ const styles = {
   eyebrowLine: {
     width: 48,
     height: 2,
-    background: "linear-gradient(90deg,#FFD700,transparent)",
+    background: "linear-gradient(90deg,#c2410c,transparent)",
   },
 
   eyebrow: {
     fontFamily: "monospace",
     fontSize: 11,
     letterSpacing: "0.25em",
-    color: "#FFD700",
+    color: "#c2410c",
     fontWeight: 700,
   },
 
@@ -257,7 +257,7 @@ const styles = {
     position: "absolute",
     inset: "28%",
     borderRadius: "50%",
-    border: "3px solid #FFD700",
+    border: "3px solid #c2410c",
     boxShadow: "0 0 24px rgba(255,215,0,0.35)",
   },
 
@@ -276,7 +276,7 @@ const styles = {
   coreLabel: {
     fontFamily: "monospace",
     letterSpacing: "0.2em",
-    color: "#FFD700",
+    color: "#c2410c",
     fontWeight: 700,
   },
 
@@ -293,7 +293,7 @@ const styles = {
     width: 42,
     height: 42,
     borderRadius: "50%",
-    border: "2px solid #FFD700",
+    border: "2px solid #c2410c",
     background: "#fff",
     fontFamily: "monospace",
     fontWeight: 700,
@@ -304,7 +304,7 @@ const styles = {
 
   markerActive: {
     background: "#002147",
-    color: "#FFD700",
+    color: "#c2410c",
     boxShadow: "0 0 16px rgba(255,215,0,0.6)",
   },
 
@@ -330,7 +330,7 @@ const styles = {
 
   stepIndex: {
     fontFamily: "monospace",
-    color: "#FFD700",
+    color: "#c2410c",
     letterSpacing: "0.2em",
     fontWeight: 700,
   },
