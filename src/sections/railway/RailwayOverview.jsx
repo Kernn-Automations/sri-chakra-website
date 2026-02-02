@@ -18,8 +18,8 @@ const RailwayOverview = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const images = {
-    hero: "https://i.ibb.co/SXLhPmTh/railway-hro.jpg",
-    fabrication: "https://i.ibb.co/RkZVbSbb/steel-fabrication.jpg",
+    hero: "/media/images/railway-hro.jpg",
+    fabrication: "/media/images/steel-fabrication.jpg",
   };
 
   return (

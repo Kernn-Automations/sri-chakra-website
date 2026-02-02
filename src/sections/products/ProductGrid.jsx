@@ -1,9 +1,72 @@
 import { useLanguage } from "../../context/LanguageContext";
 import { useMediaQuery } from "react-responsive";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ProductsGrid = ({ onSelectProduct }) => {
   const { t } = useLanguage();
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const gridRef = useRef(null);
+
+  const isTouch = typeof window !== "undefined" && "ontouchstart" in window;
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".product-card", {
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: "top 80%",
+        },
+      });
+    }, gridRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const handleMouseMove = (e, card) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateY = (x / rect.width - 0.5) * 12;
+    const rotateX = (y / rect.height - 0.5) * -12;
+
+    gsap.to(card, {
+      rotateY,
+      rotateX,
+      transformPerspective: 900,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+
+    const img = card.querySelector("img");
+    gsap.to(img, {
+      x: rotateY * 2,
+      y: rotateX * 2,
+      scale: 1.08,
+      duration: 0.4,
+    });
+  };
+
+  const resetTilt = (card) => {
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.6,
+      ease: "power3.out",
+    });
+
+    const img = card.querySelector("img");
+    gsap.to(img, { x: 0, y: 0, scale: 1, duration: 0.6 });
+  };
 
   const products = t("products.grid.items");
 
@@ -11,6 +74,7 @@ const ProductsGrid = ({ onSelectProduct }) => {
     <section style={styles.section}>
       <div style={styles.container}>
         <div
+          ref={gridRef}
           style={{
             ...styles.grid,
             gridTemplateColumns: isMobile
@@ -21,8 +85,17 @@ const ProductsGrid = ({ onSelectProduct }) => {
           {products.map((item, i) => (
             <div
               key={item.key}
+              className="product-card"
               style={styles.card}
               onClick={() => onSelectProduct(item.key)}
+              onMouseMove={
+                !isTouch
+                  ? (e) => handleMouseMove(e, e.currentTarget)
+                  : undefined
+              }
+              onMouseLeave={
+                !isTouch ? (e) => resetTilt(e.currentTarget) : undefined
+              }
             >
               {/* Image */}
               <div style={styles.imageWrap}>
@@ -59,6 +132,23 @@ const ProductsGrid = ({ onSelectProduct }) => {
           ))}
         </div>
       </div>
+
+      {/* Premium hover effects */}
+      <style>{`
+        .product-card {
+          transition: box-shadow 0.4s ease, border-color 0.4s ease;
+          transform-style: preserve-3d;
+        }
+
+        .product-card:hover {
+          box-shadow: 0 40px 80px rgba(0,33,71,0.18);
+          border-color: rgba(194,65,12,0.5);
+        }
+
+        .product-card img {
+          transition: transform 0.4s ease;
+        }
+      `}</style>
     </section>
   );
 };
@@ -88,7 +178,8 @@ const styles = {
     padding: "0 0 40px",
     border: "1px solid rgba(0,33,71,0.15)",
     background: "#fff",
-    transition: "all 0.35s ease",
+    cursor: "pointer",
+    borderRadius: 8,
   },
 
   imageWrap: {
@@ -110,7 +201,7 @@ const styles = {
     fontFamily: "monospace",
     fontSize: 12,
     letterSpacing: "0.2em",
-    color: "#FFD700",
+    color: "#C2410C",
     margin: "24px 32px 12px",
   },
 
@@ -150,6 +241,5 @@ const styles = {
     fontSize: 12,
     letterSpacing: "0.2em",
     color: "#002147",
-    cursor: "pointer",
   },
 };
