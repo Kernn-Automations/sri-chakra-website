@@ -1,5 +1,5 @@
 import { useMediaQuery } from "react-responsive";
-import { Award, Building2, Briefcase } from "lucide-react";
+import { Award, Building2, Briefcase, Phone, Mail } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -92,9 +92,15 @@ const AboutOwner = () => {
       {/* Soft spotlight background */}
       <div style={styles.bgLight} ref={bgLightRef} />
 
-      <div style={styles.container}>
+      <div style={{ ...styles.container, gap: isMobile ? "40px" : "64px" }}>
         {/* LEFT — IMAGE */}
-        <div style={styles.imageWrap}>
+        <div
+          style={{
+            ...styles.imageWrap,
+            alignItems: isMobile ? "center" : "flex-start",
+            textAlign: isMobile ? "center" : "left",
+          }}
+        >
           <div style={styles.imageRing}>
             <img
               ref={imageRef}
@@ -103,6 +109,58 @@ const AboutOwner = () => {
               style={styles.image}
               draggable={false}
             />
+          </div>
+          <div style={styles.ownerInfo}>
+            <p style={styles.ownerName}>{t("about.owner.signature")}</p>
+
+            <div
+              style={styles.contactItem}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "rgba(0,61,122,0.06)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "transparent")
+              }
+            >
+              <Phone size={28} strokeWidth={2.5} style={styles.contactIcon} />
+              <a href="tel:+917997111975" style={styles.contactLink}>
+                +91 79971 11975
+              </a>
+            </div>
+
+            <div
+              style={styles.contactItem}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "rgba(0,61,122,0.06)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "transparent")
+              }
+            >
+              <Phone size={28} strokeWidth={2.5} style={styles.contactIcon} />
+              <a href="tel:+919542111985" style={styles.contactLink}>
+                +91 95421 11985
+              </a>
+            </div>
+
+            <div
+              style={styles.contactItem}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "rgba(0,61,122,0.06)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "transparent")
+              }
+            >
+              <Mail size={28} strokeWidth={2.5} style={styles.contactIcon} />
+
+              <a
+                href="mailto:socials.srichakra@gmail.com"
+                style={styles.contactLink}
+              >
+                socials.srichakra@gmail.com
+              </a>
+            </div>
           </div>
         </div>
 
@@ -177,15 +235,67 @@ const styles = {
     margin: "0 auto",
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-    gap: "64px",
     alignItems: "center",
+  },
+
+  ownerInfo: {
+    marginTop: 26,
+    padding: "22px",
+    borderRadius: 18,
+    background: "#ffffff",
+    boxShadow: "0 15px 40px rgba(2, 6, 23, 0.12)",
+    border: "1px solid rgba(0, 61, 122, 0.12)",
+    width: "100%",
+    maxWidth: 340,
+  },
+
+  ownerName: {
+    fontSize: 22,
+    fontWeight: 800,
+    marginBottom: 16,
+    color: "#0f172a",
+  },
+
+  contactItem: {
+    display: "flex",
+    alignItems: "center",
+    gap: 14,
+    fontSize: 16,
+    padding: "12px 14px",
+    borderRadius: 12,
+    background: "rgba(0, 61, 122, 0.04)",
+    marginBottom: 10,
+    transition: "all 0.2s ease",
+  },
+
+  contactItemHover: {
+    background: "rgba(0, 61, 122, 0.06)",
+  },
+
+  contactIcon: {
+    color: "#003d7a",
+    background: "rgba(0,61,122,0.12)",
+    padding: 8,
+    borderRadius: 10,
+    minWidth: 36,
+    minHeight: 36,
+  },
+
+  contactLink: {
+    color: "#0f172a",
+    textDecoration: "none",
+    fontWeight: 700,
+    letterSpacing: "0.3px",
   },
 
   imageWrap: {
     position: "relative",
     display: "flex",
-    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
   },
+
   imageGlow: {
     position: "absolute",
     width: 360,

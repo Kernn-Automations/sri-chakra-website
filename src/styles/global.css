@@ -29,3 +29,12 @@ input {
 #blueprint-wrapper {
   pointer-events: none !important;
 }
+
+@keyframes floatBg {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-40px);
+  }
+}

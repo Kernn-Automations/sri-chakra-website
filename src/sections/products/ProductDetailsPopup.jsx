@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import { useLanguage } from "../../context/LanguageContext";
+import gsap from "gsap";
 import RoofSheet3D from "../../drawings/RoofSheet3D";
 import WBeamVisual from "../../drawings/WBeamVisual";
 
@@ -16,110 +18,119 @@ const COLORS = [
 const ProductDetailsPopup = ({ open, onClose, productKey }) => {
   const { t } = useLanguage();
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const panelRef = useRef(null);
 
   const product = t(`products.details.${productKey}`);
-
   const [activeColor, setActiveColor] = useState(COLORS[0]);
 
-  useEffect(() => {
-    setActiveColor(COLORS[0]);
-  }, [productKey]);
+  useEffect(() => setActiveColor(COLORS[0]), [productKey]);
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!open) return;
+    document.body.style.overflow = "hidden";
 
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
+    gsap.fromTo(
+      panelRef.current,
+      isMobile ? { y: "100%" } : { scale: 0.9, opacity: 0 },
+      isMobile
+        ? { y: 0, duration: 0.6, ease: "power4.out" }
+        : { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" },
+    );
+
+    return () => (document.body.style.overflow = "");
+  }, [open, isMobile]);
 
   if (!open || !product) return null;
 
-  return (
+  return createPortal(
     <div style={styles.overlay} onClick={onClose}>
-      <div style={styles.containerWrapper} onClick={(e) => e.stopPropagation()}>
-        {/* Close */}
-        <button onClick={onClose} style={styles.closeBtn}>
-          <X size={18} />
+      <div
+        ref={panelRef}
+        style={{
+          ...styles.panel,
+          ...(isMobile ? styles.mobilePanel : styles.desktopPanel),
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {isMobile && <div style={styles.dragHandle} />}
+        <button style={styles.closeBtn} onClick={onClose}>
+          <X size={20} />
         </button>
 
-        <div
-          className="product-popup-scroll"
-          style={{
-            ...styles.container,
-            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-          }}
-        >
-          {/* LEFT — VISUAL */}
-          <div style={styles.visualArea}>
-            {/* Roofing Sheet */}
-            {productKey === "roofing" && (
-              <>
-                <RoofSheet3D color={activeColor.hex} />
-                <div style={styles.colorRow}>
-                  {COLORS.map((c) => (
-                    <button
-                      key={c.name}
-                      onClick={() => setActiveColor(c)}
-                      style={{
-                        ...styles.colorSwatch,
-                        background: c.hex,
-                        outline:
-                          activeColor.name === c.name
-                            ? "3px solid #FFD700"
-                            : "none",
-                      }}
-                      title={c.name}
-                    />
-                  ))}
-                </div>
-
-                <span style={styles.colorLabel}>
-                  {t("products.details.color")}: {activeColor.name}
-                </span>
-              </>
-            )}
-
-            {/* W-BEAM */}
-            {productKey === "wbeam" && <WBeamVisual />}
-          </div>
-
-          {/* RIGHT — DETAILS */}
-          <div style={styles.details}>
-            <span style={styles.eyebrow}>{product.category}</span>
-
+        {/* MOBILE HEADER FIRST */}
+        {isMobile && (
+          <div style={styles.mobileHeader}>
+            <span style={styles.category}>{product.category}</span>
             <h2 style={styles.title}>{product.title}</h2>
+          </div>
+        )}
 
-            <p style={styles.desc}>{product.description}</p>
+        {/* VISUAL SECTION */}
+        <div style={styles.visualSection}>
+          {productKey === "roofing" && (
+            <>
+              <div
+                style={{
+                  ...styles.visualWrap,
+                  ...(isMobile && styles.mobileVisualWrap),
+                }}
+              >
+                <RoofSheet3D color={activeColor.hex} />
+              </div>
 
-            {/* Specs */}
-            <div style={styles.specBlock}>
-              <h4 style={styles.specTitle}>
-                {t("products.details.specsTitle")}
-              </h4>
-
-              <ul style={styles.specList}>
-                {product.specs.map((s, i) => (
-                  <li key={i}>{s}</li>
+              <div style={styles.colorRow}>
+                {COLORS.map((c) => (
+                  <button
+                    key={c.name}
+                    onClick={() => setActiveColor(c)}
+                    style={{
+                      ...styles.colorSwatch,
+                      background: c.hex,
+                      boxShadow:
+                        activeColor.name === c.name
+                          ? "0 0 0 2px #fff, 0 0 10px rgba(194,65,12,0.9)"
+                          : "none",
+                    }}
+                  />
                 ))}
-              </ul>
-            </div>
+              </div>
 
-            {/* Source 
-            <div style={styles.sourceBlock}>
-              <h4 style={styles.specTitle}>
-                {t("products.details.sourceTitle")}
-              </h4>
-              <p>{product.source}</p>
-            </div>*/}
+              <span style={styles.colorLabel}>
+                {t("products.details.color")}: {activeColor.name}
+              </span>
+            </>
+          )}
+
+          {productKey === "wbeam" && (
+            <div style={isMobile ? { transform: "scale(0.85)" } : null}>
+              <WBeamVisual />
+            </div>
+          )}
+        </div>
+
+        {/* INFO SECTION */}
+        <div style={styles.infoSection}>
+          {!isMobile && (
+            <>
+              <span style={styles.category}>{product.category}</span>
+              <h2 style={styles.title}>{product.title}</h2>
+            </>
+          )}
+
+          <p style={styles.desc}>{product.description}</p>
+
+          <div style={styles.specBlock}>
+            <h4 style={styles.specTitle}>{t("products.details.specsTitle")}</h4>
+            <ul style={styles.specList}>
+              {product.specs.map((s, i) => (
+                <li key={i}>{s}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.getElementById("portal-root"),
   );
 };
 
@@ -129,170 +140,146 @@ const styles = {
   overlay: {
     position: "fixed",
     inset: 0,
-    background: "rgba(10,26,47,0.92)",
-    zIndex: 200,
+    background: "rgba(5,15,30,0.88)",
+    backdropFilter: "blur(10px)",
+    zIndex: 999999,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: "24px 16px", // ⬅️ reduce from 40px
+    padding: 20,
+  },
+
+  panel: {
+    background: "#0a1a2f",
+    color: "#fff",
+    width: "100%",
+    maxWidth: 1100,
+    maxHeight: "90vh",
+    borderRadius: 18,
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+    boxShadow: "0 40px 100px rgba(0,0,0,0.6)",
+  },
+
+  desktopPanel: {
+    flexDirection: "row",
+  },
+
+  mobilePanel: {
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    maxHeight: "88vh",
+  },
+
+  dragHandle: {
+    width: 50,
+    height: 5,
+    background: "rgba(255,255,255,0.3)",
+    borderRadius: 999,
+    margin: "10px auto 6px",
   },
 
   closeBtn: {
     position: "absolute",
     top: 14,
     right: 14,
-    zIndex: 10,
     background: "rgba(255,255,255,0.1)",
-    border: "1px solid rgba(255,255,255,0.15)",
+    border: "1px solid rgba(255,255,255,0.2)",
     borderRadius: "50%",
-    width: 34,
-    height: 34,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#FFD700",
-    cursor: "pointer",
-    backdropFilter: "blur(8px)",
-  },
-
-  containerWrapper: {
-    position: "relative",
-    top: "5%",
-    width: "100%",
-    maxWidth: 1240,
-    height: "86vh", // FIXED height, not maxHeight
-    background: "#0a1a2f",
-    border: "1px solid rgba(255,255,255,0.08)",
-    boxShadow: "0 60px 120px rgba(0,0,0,0.65)",
-    borderRadius: 14,
-    overflow: "hidden", // stays hidden
-  },
-
-  container: {
-    display: "grid",
-    gap: 56,
-    padding: "44px 48px 40px",
+    width: 38,
+    height: 38,
     color: "#fff",
-    height: "100%", // ⬅️ fill wrapper
-    //overflowY: "auto", // ⬅️ ONLY scroll here
+    cursor: "pointer",
+    zIndex: 5,
   },
 
-  /* VISUAL */
-  visualArea: {
+  visualSection: {
+    flex: 1,
+    padding: 30,
+    borderBottom: "1px solid rgba(255,255,255,0.08)",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: 32,
+    justifyContent: "center",
+    gap: 14,
   },
 
-  sheet3D: {
+  visualWrap: {
     width: "100%",
-    maxWidth: 440,
-    height: 260,
-    transform: "perspective(900px) rotateX(14deg) rotateZ(-1deg)",
-    background: `
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.25),
-      rgba(0,0,0,0.35)
-    )
-  `,
-    display: "grid",
-    gridTemplateColumns: "repeat(12, 1fr)",
-    boxShadow: `
-    inset 0 8px 16px rgba(255,255,255,0.35),
-    inset 0 -12px 24px rgba(0,0,0,0.45),
-    0 50px 90px rgba(0,0,0,0.75)
-  `,
-    borderRadius: 6,
-    overflow: "hidden",
+    maxWidth: 420,
   },
 
-  groove: {
-    background: `
-    linear-gradient(
-      to right,
-      rgba(255,255,255,0.45),
-      rgba(255,255,255,0.08) 30%,
-      rgba(0,0,0,0.25) 60%,
-      rgba(0,0,0,0.45)
-    )
-  `,
-    boxShadow: `
-    inset 2px 0 6px rgba(255,255,255,0.35),
-    inset -2px 0 8px rgba(0,0,0,0.4)
-  `,
+  mobileVisualWrap: {
+    maxWidth: 260,
+  },
+
+  infoSection: {
+    flex: 1,
+    padding: 30,
+    overflowY: "auto",
+  },
+
+  mobileHeader: {
+    padding: "10px 20px 0",
+  },
+
+  category: {
+    fontSize: 12,
+    letterSpacing: "0.25em",
+    color: "#C2410C",
+  },
+
+  title: {
+    fontSize: "clamp(24px,4vw,34px)",
+    margin: "8px 0 14px",
+  },
+
+  desc: {
+    color: "rgba(255,255,255,0.8)",
+    lineHeight: 1.7,
+  },
+
+  specBlock: {
+    marginTop: 20,
+    borderLeft: "3px solid #C2410C",
+    paddingLeft: 14,
+  },
+
+  specTitle: {
+    fontSize: 13,
+    letterSpacing: "0.15em",
+    marginBottom: 10,
+    color: "#C2410C",
+  },
+
+  specList: {
+    paddingLeft: 16,
+    lineHeight: 1.6,
   },
 
   colorRow: {
     display: "flex",
-    gap: 12,
+    gap: 10,
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
 
   colorSwatch: {
-    width: 32,
-    height: 32,
+    width: 30,
+    height: 30,
     borderRadius: "50%",
     border: "none",
     cursor: "pointer",
   },
 
   colorLabel: {
-    fontFamily: "monospace",
-    fontSize: 12,
-    letterSpacing: "0.2em",
-    color: "#FFD700",
-  },
-
-  /* DETAILS */
-  details: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 24,
-    alignSelf: "flex-start", // ⬅️ prevents vertical stretching
-  },
-
-  eyebrow: {
-    fontFamily: "monospace",
     fontSize: 11,
-    letterSpacing: "0.3em",
-    color: "#FFD700",
-  },
-
-  title: {
-    fontFamily: "Georgia, serif",
-    fontSize: "clamp(32px,4vw,48px)",
-    lineHeight: 1.1,
-  },
-
-  desc: {
-    fontSize: 16,
-    lineHeight: 1.7,
-    color: "rgba(255,255,255,0.8)",
-  },
-
-  specBlock: {
-    borderLeft: "3px solid #FFD700",
-    paddingLeft: 20,
-  },
-
-  specTitle: {
-    fontSize: 14,
-    letterSpacing: "0.15em",
-    marginBottom: 12,
-  },
-
-  specList: {
-    listStyle: "none",
-    padding: 0,
-    display: "flex",
-    flexDirection: "column",
-    gap: 8,
-  },
-
-  sourceBlock: {
-    marginTop: 16,
-    fontSize: 14,
-    color: "rgba(255,255,255,0.8)",
+    letterSpacing: "0.18em",
+    color: "#C2410C",
   },
 };
